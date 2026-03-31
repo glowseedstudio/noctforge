@@ -494,6 +494,11 @@
       transition: opacity 0.15s;
     }
     .accent-swatch:hover .swatch-tooltip { opacity: 1; }
+    .accent-swatch.active {
+      border-color: rgba(255,255,255,0.9);
+      transform: scale(1.15);
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.25), 0 0 20px var(--accent-glow);
+    }
 
     /* ── FEATURES ── */
     .features-categories {
@@ -1944,6 +1949,35 @@ const countObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('.count-up[data-target]').forEach(el => countObserver.observe(el));
+
+// ── ACCENT SWITCHER ──
+const accentPalette = {
+  'Cyan Core':    { accent:'#00e5ff', dim:'rgba(0,229,255,0.18)',   glow:'rgba(0,229,255,0.35)',   border:'rgba(0,229,255,0.22)' },
+  'Magenta Drift':{ accent:'#e040fb', dim:'rgba(224,64,251,0.18)',  glow:'rgba(224,64,251,0.35)',  border:'rgba(224,64,251,0.22)' },
+  'Amber Hazard': { accent:'#ffab40', dim:'rgba(255,171,64,0.18)',  glow:'rgba(255,171,64,0.35)',  border:'rgba(255,171,64,0.22)' },
+  'Purple Pulse': { accent:'#7c4dff', dim:'rgba(124,77,255,0.18)',  glow:'rgba(124,77,255,0.35)',  border:'rgba(124,77,255,0.22)' },
+  'Green Vector': { accent:'#69ff47', dim:'rgba(105,255,71,0.18)',  glow:'rgba(105,255,71,0.35)',  border:'rgba(105,255,71,0.22)' },
+  'Midnight':     { accent:'#b0bec5', dim:'rgba(176,190,197,0.18)', glow:'rgba(176,190,197,0.28)', border:'rgba(176,190,197,0.18)' },
+};
+
+function applyAccent(name) {
+  const p = accentPalette[name];
+  if (!p) return;
+  const r = document.documentElement;
+  r.style.setProperty('--accent',      p.accent);
+  r.style.setProperty('--accent-dim',  p.dim);
+  r.style.setProperty('--accent-glow', p.glow);
+  r.style.setProperty('--border',      p.border);
+  document.querySelectorAll('.accent-swatch').forEach(s => {
+    s.classList.toggle('active', s.dataset.name === name);
+  });
+}
+
+// Mark Cyan Core active on load, wire up clicks.
+applyAccent('Cyan Core');
+document.querySelectorAll('.accent-swatch').forEach(s => {
+  s.addEventListener('click', () => applyAccent(s.dataset.name));
+});
 
 // ── FEATURE CATEGORY FILTER ──
 document.querySelectorAll('.cat-btn').forEach(btn => {
