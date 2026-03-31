@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoctForge — Offline tools. No tracking. Pure power.</title>
+  <meta name="description" content="33 tools, 9 games, and a complete music suite. Premium Android app. $6.99 AUD. One-time. No subscriptions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:       #00e5ff;
+      --accent-dim:   rgba(0,229,255,0.18);
+      --accent-glow:  rgba(0,229,255,0.35);
+      --bg:           #050608;
+      --bg2:          #080c14;
+      --bg3:          #0b1220;
+      --surface:      rgba(10,20,40,0.72);
+      --surface2:     rgba(14,28,52,0.85);
+      --border:       rgba(0,229,255,0.22);
+      --border-dim:   rgba(255,255,255,0.08);
+      --text:         #f0f4ff;
+      --text-dim:     rgba(240,244,255,0.62);
+      --text-muted:   rgba(240,244,255,0.38);
+      --radius-lg:    20px;
+      --radius-md:    14px;
+      --radius-sm:    8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── GRID NOISE BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── SCANLINE OVERLAY ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.07) 2px,
+        rgba(0,0,0,0.07) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── CANVAS PARTICLES ── */
+    #particles-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── LAYOUT ── */
+    section { position: relative; z-index: 2; }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 24px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(5,6,8,0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-dim);
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+
+    .nav-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-brand-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow: 0 0 8px var(--accent); opacity:1; }
+      50% { box-shadow: 0 0 18px var(--accent), 0 0 32px var(--accent-glow); opacity:0.7; }
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent-dim);
+      border: 1px solid var(--border);
+      color: var(--accent) !important;
+      padding: 7px 18px;
+      border-radius: 999px;
+      transition: background 0.2s, box-shadow 0.2s !important;
+    }
+    .nav-cta:hover {
+      background: rgba(0,229,255,0.28) !important;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 24px 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-inner { width: 100%; max-width: 860px; margin: 0 auto; }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      animation: fade-up 0.8s ease both;
+    }
+    .hero-pill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(48px, 9vw, 96px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      animation: fade-up 0.9s 0.1s ease both;
+    }
+    .hero-title .glow-text {
+      background: linear-gradient(135deg, #00e5ff 0%, #a78bfa 60%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 24px rgba(0,229,255,0.4));
+    }
+
+    .hero-tagline {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 600;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+      animation: fade-up 1s 0.2s ease both;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      animation: fade-up 1s 0.3s ease both;
+    }
+
+    .hero-actions {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 14px;
+      animation: fade-up 1s 0.4s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.22), rgba(0,229,255,0.1));
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 0 24px rgba(0,229,255,0.15), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, rgba(0,229,255,0.36), rgba(0,229,255,0.2));
+      box-shadow: 0 0 40px rgba(0,229,255,0.3), 0 4px 16px rgba(0,0,0,0.4);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      border: 1px solid var(--border-dim);
+      color: var(--text-dim);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--border);
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+      margin-top: 64px;
+      animation: fade-up 1s 0.5s ease both;
+      border: 1px solid var(--border-dim);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+    .hero-stat {
+      flex: 1; min-width: 140px;
+      padding: 24px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border-dim);
+      position: relative;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-dim);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ── GLASS CARD ── */
+    .glass-card {
+      background: var(--surface);
+      border: 1px solid var(--border-dim);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .glass-card:hover {
+      border-color: var(--border);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border);
+      transform: translateY(-4px);
+    }
+
+    /* ── SECTION SPACING ── */
+    .section { padding: 100px 0; }
+    .section-alt { background: linear-gradient(180deg, transparent, rgba(0,229,255,0.02) 50%, transparent); }
+
+    /* ── WHY NOCTFORGE ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .why-card {
+      padding: 32px;
+    }
+    .why-icon {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-dim);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .why-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .why-card p {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ── THEME PACKS ── */
+    .theme-packs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 680px) { .theme-packs { grid-template-columns: 1fr; } }
+
+    .theme-pack-card {
+      padding: 28px 24px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .theme-pack-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: inherit;
+    }
+    .theme-pack-card.neon::before {
+      background: radial-gradient(ellipse at top, rgba(0,229,255,0.12), transparent 60%);
+    }
+    .theme-pack-card.noir::before {
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.06), transparent 60%);
+    }
+    .theme-pack-card.studio::before {
+      background: radial-gradient(ellipse at top, rgba(99,179,237,0.1), transparent 60%);
+    }
+    .theme-pack-card:hover::before { opacity: 1; }
+
+    .theme-pack-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .theme-pack-card.neon .theme-pack-name { color: var(--accent); }
+    .theme-pack-card.noir .theme-pack-name { color: #e2e8f0; }
+    .theme-pack-card.studio .theme-pack-name { color: #63b3ed; }
+
+    .theme-pack-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .accent-swatches {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+      margin-top: 12px;
+    }
+    .accent-swatch {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    .accent-swatch:hover {
+      transform: scale(1.2);
+    }
+    .accent-swatch[data-name="Cyan Core"]    { background: #00e5ff; box-shadow: 0 0 12px rgba(0,229,255,0.5); }
+    .accent-swatch[data-name="Magenta Drift"]{ background: #e040fb; box-shadow: 0 0 12px rgba(224,64,251,0.5); }
+    .accent-swatch[data-name="Amber Hazard"] { background: #ffab40; box-shadow: 0 0 12px rgba(255,171,64,0.5); }
+    .accent-swatch[data-name="Purple Pulse"] { background: #7c4dff; box-shadow: 0 0 12px rgba(124,77,255,0.5); }
+    .accent-swatch[data-name="Green Vector"] { background: #69ff47; box-shadow: 0 0 12px rgba(105,255,71,0.5); }
+    .accent-swatch[data-name="Midnight"]     { background: #b0bec5; box-shadow: 0 0 12px rgba(176,190,197,0.4); }
+    .swatch-tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      padding: 4px 10px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .accent-swatch:hover .swatch-tooltip { opacity: 1; }
+
+    /* ── FEATURES ── */
+    .features-categories {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 40px;
+    }
+    .cat-btn {
+      background: transparent;
+      border: 1px solid var(--border-dim);
+      color: var(--text-dim);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--accent-dim);
+      border-color: var(--border);
+      color: var(--accent);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 24px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: all 0.3s;
+    }
+    .feature-card.hidden { display: none; }
+
+    .feature-icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+    .feature-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .feature-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,229,255,0.2);
+      padding: 3px 10px;
+      border-radius: 999px;
+      align-self: flex-start;
+    }
+
+    /* ── MUSIC SECTION ── */
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .music-card {
+      padding: 32px;
+    }
+    .music-card-accent {
+      display: inline-block;
+      width: 40px; height: 4px;
+      border-radius: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      margin-bottom: 18px;
+    }
+    .music-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .music-card p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ── GAMES ── */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .game-card {
+      padding: 20px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 8px;
+    }
+    .game-icon { font-size: 36px; line-height: 1; }
+    .game-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .game-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── PRIVACY ── */
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .privacy-card {
+      padding: 28px;
+      display: flex; gap: 16px;
+    }
+    .privacy-icon {
+      flex-shrink: 0;
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .privacy-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .privacy-card p {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ── PRICING ── */
+    #pricing {
+      text-align: center;
+    }
+    .pricing-card {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      background: linear-gradient(135deg, rgba(10,22,44,0.9), rgba(6,14,28,0.95));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute; top: -1px; left: 10%; right: 10%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .pricing-glow {
+      position: absolute; top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-price {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #00e5ff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .pricing-currency {
+      font-size: 24px;
+      vertical-align: super;
+      margin-right: 2px;
+    }
+    .pricing-period {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 36px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .pricing-features li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-align: left;
+    }
+    .pricing-check {
+      color: var(--accent);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .pricing-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 20px;
+    }
+
+    /* ── SCREENSHOT PLACEHOLDER ── */
+    .screenshot-placeholder {
+      width: 100%;
+      aspect-ratio: 9/16;
+      max-width: 220px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-align: center;
+      padding: 20px;
+    }
+    .screenshot-placeholder-icon { font-size: 32px; opacity: 0.4; }
+    .screenshots-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+
+    /* ── NOCTPILL HIGHLIGHT ── */
+    .noctpill-card {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(124,77,255,0.06));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 680px) {
+      .noctpill-card { grid-template-columns: 1fr; padding: 32px 24px; }
+    }
+    .noctpill-card h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .noctpill-card h2 span { color: var(--accent); }
+    .noctpill-card p {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .pill-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .pill-features li {
+      font-size: 14px;
+      color: var(--text-dim);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .pill-features li::before {
+      content: '▸';
+      color: var(--accent);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .pill-visual {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pill-mockup {
+      width: 160px; height: 48px;
+      border-radius: 999px;
+      background: rgba(10,20,40,0.9);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      box-shadow: 0 0 40px rgba(0,229,255,0.2), 0 0 80px rgba(0,229,255,0.08);
+      animation: float 3s ease-in-out infinite;
+    }
+    .pill-mockup-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .pill-mockup-dot:nth-child(1) { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+    .pill-mockup-dot:nth-child(2) { background: #a78bfa; box-shadow: 0 0 8px #a78bfa; animation-delay: 0.3s; }
+    .pill-mockup-dot:nth-child(3) { background: #f472b6; box-shadow: 0 0 8px #f472b6; animation-delay: 0.6s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border-dim);
+      padding: 48px 24px;
+      text-align: center;
+      position: relative; z-index: 2;
+    }
+    .footer-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .footer-links {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 24px; list-style: none;
+      margin-bottom: 32px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── NEON LINE DIVIDER ── */
+    .neon-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), #a78bfa, transparent);
+      margin: 0 auto;
+      max-width: 360px;
+      margin-bottom: 64px;
+      opacity: 0.4;
+    }
+
+    /* ── COUNTER ANIMATION ── */
+    .count-up { display: inline-block; }
+  </style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">
+    <div class="nav-brand-dot"></div>
+    NoctForge
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#games">Games</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#pricing" class="nav-cta">Get the app</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-pill">
+      <div class="hero-pill-dot"></div>
+      Now available on Android
+    </div>
+    <h1 class="hero-title">
+      <span class="glow-text">NoctForge</span>
+    </h1>
+    <p class="hero-tagline">Offline tools. No tracking. Pure power.</p>
+    <p class="hero-desc">
+      33 tools, 9 games, and a complete music suite — wrapped in a cyberpunk glassmorphism design
+      that makes every interaction feel like operating a piece of future technology.
+      No subscriptions. No cloud accounts. No internet required.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        Get on Google Play
+      </a>
+      <a href="#features" class="btn-secondary">
+        Explore features ↓
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num count-up" data-target="33">0</span>
+        <span class="hero-stat-label">Tools</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num count-up" data-target="9">0</span>
+        <span class="hero-stat-label">Games</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num count-up" data-target="0">$6.99</span>
+        <span class="hero-stat-label">AUD · One-time</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">0</span>
+        <span class="hero-stat-label">Subscriptions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS PLACEHOLDER -->
+<section class="section container" id="screenshots">
+  <div class="screenshots-row">
+    <div class="screenshot-placeholder">
+      <div class="screenshot-placeholder-icon">📱</div>
+      Screenshot coming soon
+    </div>
+    <div class="screenshot-placeholder">
+      <div class="screenshot-placeholder-icon">📱</div>
+      Screenshot coming soon
+    </div>
+    <div class="screenshot-placeholder">
+      <div class="screenshot-placeholder-icon">📱</div>
+      Screenshot coming soon
+    </div>
+    <div class="screenshot-placeholder">
+      <div class="screenshot-placeholder-icon">📱</div>
+      Screenshot coming soon
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOCTFORGE -->
+<section class="section section-alt" id="why">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Why NoctForge</span>
+      <h2 class="section-title">Built differently. On purpose.</h2>
+      <p class="section-sub">Most utility apps are ugly. Most are ad-supported. Most send your data somewhere. NoctForge does none of those things.</p>
+    </div>
+    <div class="why-grid">
+      <div class="glass-card why-card reveal reveal-delay-1">
+        <div class="why-icon">🔒</div>
+        <h3>Privacy is the foundation, not a feature</h3>
+        <p>Every sensitive tool uses XChaCha20-Poly1305 encryption at rest. Secrets are kept in the Android Keystore with hardware backing. Screenshots are blocked on every sensitive screen. Your data does not travel. Period.</p>
+      </div>
+      <div class="glass-card why-card reveal reveal-delay-2">
+        <div class="why-icon">✦</div>
+        <h3>The design is a genuine differentiator</h3>
+        <p>Three theme packs. Six neon accent colours. Eight background gradient presets. CRT scanline overlays. Glow borders with halos. Frosted glass everywhere. NoctForge is the only utility app that looks like someone actually cared.</p>
+      </div>
+      <div class="glass-card why-card reveal reveal-delay-3">
+        <div class="why-icon">⚡</div>
+        <h3>The depth is real</h3>
+        <p>Every tool goes further than competitors. The flashlight has a Morse code transmitter. The PDF suite has cryptographic digital signing and on-device OCR. The music player has an end-of-year listening recap. Thirty-three tools. Each one complete.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN -->
+<section class="section" id="design">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">The Design</span>
+      <h2 class="section-title">Cyberpunk Glassmorphism</h2>
+      <p class="section-sub">A visual language, not a coat of paint. Three theme packs, six accent presets, eight backgrounds — every combination a distinct atmosphere.</p>
+    </div>
+
+    <div class="theme-packs reveal">
+      <div class="glass-card theme-pack-card neon">
+        <div class="theme-pack-name">Neon</div>
+        <div class="theme-pack-desc">Frosted glass, CRT scanlines, neon glows, deep near-black backgrounds. The full expression.</div>
+      </div>
+      <div class="glass-card theme-pack-card noir">
+        <div class="theme-pack-name">Noir</div>
+        <div class="theme-pack-desc">Solid panels, subtle gradients, refined dark minimalism. The same precision without the electricity.</div>
+      </div>
+      <div class="glass-card theme-pack-card studio">
+        <div class="theme-pack-name">Studio</div>
+        <div class="theme-pack-desc">Clean, professional, readable. For bright environments and users who prefer light-background contrast.</div>
+      </div>
+    </div>
+
+    <div class="section-header reveal" style="margin-top:48px; margin-bottom:24px;">
+      <span class="section-eyebrow">Accent Colours</span>
+      <p class="section-sub">Six carefully chosen accents cascade through every interactive element, glow, border, and highlight.</p>
+    </div>
+
+    <div class="accent-swatches reveal" style="justify-content:center; gap:18px; margin-bottom:56px;">
+      <div class="accent-swatch" data-name="Cyan Core"><div class="swatch-tooltip">Cyan Core</div></div>
+      <div class="accent-swatch" data-name="Magenta Drift"><div class="swatch-tooltip">Magenta Drift</div></div>
+      <div class="accent-swatch" data-name="Amber Hazard"><div class="swatch-tooltip">Amber Hazard</div></div>
+      <div class="accent-swatch" data-name="Purple Pulse"><div class="swatch-tooltip">Purple Pulse</div></div>
+      <div class="accent-swatch" data-name="Green Vector"><div class="swatch-tooltip">Green Vector</div></div>
+      <div class="accent-swatch" data-name="Midnight"><div class="swatch-tooltip">Midnight</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOCTPILL HIGHLIGHT -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="noctpill-card reveal">
+      <div>
+        <span class="section-eyebrow" style="text-align:left;">Exclusive Feature</span>
+        <h2>Noctpill — <span>Your floating command centre</span></h2>
+        <p>A persistent pill-shaped overlay that hovers above every app on your screen. Music controls, shortcuts, calendar, a quick scratchpad — accessible without ever leaving what you're doing.</p>
+        <ul class="pill-features">
+          <li>Music playback controls from any app</li>
+          <li>8 configurable shortcut buttons</li>
+          <li>Quick note scratchpad (biometric-locked)</li>
+          <li>RGB glow synced to album artwork</li>
+          <li>Android Quick Settings tile toggle</li>
+          <li>Per-app auto-hide list</li>
+        </ul>
+      </div>
+      <div class="pill-visual">
+        <div>
+          <div class="pill-mockup" style="margin: 0 auto 20px;">
+            <div class="pill-mockup-dot"></div>
+            <div class="pill-mockup-dot"></div>
+            <div class="pill-mockup-dot"></div>
+          </div>
+          <p style="text-align:center; font-size:12px; color:var(--text-muted); font-weight:600; letter-spacing:0.08em; text-transform:uppercase;">NoctPill overlay</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">The Tools</span>
+      <h2 class="section-title">33 tools. Every one complete.</h2>
+      <p class="section-sub">One app that replaces a drawer full of separate downloads. Every tool goes deeper than you expect.</p>
+    </div>
+
+    <div class="features-categories reveal">
+      <button class="cat-btn active" data-cat="all">All</button>
+      <button class="cat-btn" data-cat="utilities">Utilities</button>
+      <button class="cat-btn" data-cat="audio">Audio</button>
+      <button class="cat-btn" data-cat="documents">Documents</button>
+      <button class="cat-btn" data-cat="sensors">Sensors</button>
+      <button class="cat-btn" data-cat="time">Time</button>
+      <button class="cat-btn" data-cat="dev">Dev Tools</button>
+    </div>
+
+    <div class="features-grid" id="features-grid">
+
+      <div class="glass-card feature-card reveal" data-cat="utilities">
+        <div class="feature-icon">🌙</div>
+        <h3>Moon Phase</h3>
+        <p>Full astronomical calculator — phase, illumination, rise/set times, eclipse calendar for 12 months. Pure maths, no internet.</p>
+        <span class="feature-tag">Utilities</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-1" data-cat="utilities">
+        <div class="feature-icon">🔦</div>
+        <h3>Flashlight</h3>
+        <p>Variable brightness, stealth mode, and a full Morse code transmitter. The flashlight that does too much.</p>
+        <span class="feature-tag">Utilities</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-2" data-cat="utilities">
+        <div class="feature-icon">⚖️</div>
+        <h3>Conversions</h3>
+        <p>14 categories — length, weight, temp, volume, speed, data, energy, pressure, angle, force, fuel, cooking and more. All units, instant.</p>
+        <span class="feature-tag">Utilities</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-3" data-cat="utilities">
+        <div class="feature-icon">📅</div>
+        <h3>Reminders</h3>
+        <p>Exact-time notifications with rich repeat options. Survives reboots. No account required.</p>
+        <span class="feature-tag">Utilities</span>
+      </div>
+
+      <div class="glass-card feature-card reveal" data-cat="utilities">
+        <div class="feature-icon">🔐</div>
+        <h3>Authenticator</h3>
+        <p>TOTP 2FA with hardware-backed encryption. Encrypted backup with PBKDF2 key derivation. No cloud, ever.</p>
+        <span class="feature-tag">Utilities</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-1" data-cat="utilities">
+        <div class="feature-icon">🎲</div>
+        <h3>Dice Roller</h3>
+        <p>d4 through d100, up to 20 dice, modifiers, advantage/disadvantage, physics tray simulation, shake to roll.</p>
+        <span class="feature-tag">Utilities</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-2" data-cat="utilities">
+        <div class="feature-icon">🔑</div>
+        <h3>Quick Tools</h3>
+        <p>Tip calculator, random picker with weights, URL tracker stripper (50+ params), password generator with entropy display, text tools.</p>
+        <span class="feature-tag">Utilities</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-3" data-cat="utilities">
+        <div class="feature-icon">📷</div>
+        <h3>QR Tools</h3>
+        <p>Generator with 10 modes (text, URL, WiFi, vCard, email, SMS, location, event, deep link) and a full scanner with history.</p>
+        <span class="feature-tag">Utilities</span>
+      </div>
+
+      <div class="glass-card feature-card reveal" data-cat="audio">
+        <div class="feature-icon">🎵</div>
+        <h3>Music Player</h3>
+        <p>Full local player — MP3, FLAC, OGG, WAV, M4A, OPUS. EQ, sleep timer, queue, M3U playlists, album art. No streaming.</p>
+        <span class="feature-tag">Audio</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-1" data-cat="audio">
+        <div class="feature-icon">📊</div>
+        <h3>YearForge</h3>
+        <p>End-of-year listening recap — like Spotify Wrapped, fully offline. Top tracks, artists, heatmaps, hourly profile, new discoveries.</p>
+        <span class="feature-tag">Audio</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-2" data-cat="audio">
+        <div class="feature-icon">🎤</div>
+        <h3>Voice Memos</h3>
+        <p>Record, organise and play back voice memos. Date-grouped library, folder management, waveform display.</p>
+        <span class="feature-tag">Audio</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-3" data-cat="audio">
+        <div class="feature-icon">🎛️</div>
+        <h3>Visualiser</h3>
+        <p>Six reactive modes — spectrum, waveform, oscilloscope, particles, radial, mirror. Live from player or microphone.</p>
+        <span class="feature-tag">Audio</span>
+      </div>
+
+      <div class="glass-card feature-card reveal" data-cat="documents">
+        <div class="feature-icon">📄</div>
+        <h3>StitchPDF</h3>
+        <p>Scan, merge, annotate, compress, OCR, digitally sign, and encrypt PDFs. A complete PDF suite in one tool.</p>
+        <span class="feature-tag">Documents</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-1" data-cat="documents">
+        <div class="feature-icon">📝</div>
+        <h3>NullJot Notes</h3>
+        <p>Encrypted notes, checklists, recipes and credentials. Decoy vault, panic lock, clipboard auto-clear, secure delete.</p>
+        <span class="feature-tag">Documents</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-2" data-cat="documents">
+        <div class="feature-icon">📚</div>
+        <h3>Reader</h3>
+        <p>PDF and EPUB reader with bookmarks, immersive mode, and an encrypted private shelf for sensitive documents.</p>
+        <span class="feature-tag">Documents</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-3" data-cat="sensors">
+        <div class="feature-icon">🧭</div>
+        <h3>Compass</h3>
+        <p>True vs magnetic north toggle, tilt compensation, automatic declination correction — calculated locally, no API.</p>
+        <span class="feature-tag">Sensors</span>
+      </div>
+
+      <div class="glass-card feature-card reveal" data-cat="sensors">
+        <div class="feature-icon">🌡️</div>
+        <h3>Barometer</h3>
+        <p>Pressure in hPa/mbar/inHg, altitude estimation, 30-reading sparkline trend, weather tendency label.</p>
+        <span class="feature-tag">Sensors</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-1" data-cat="sensors">
+        <div class="feature-icon">💡</div>
+        <h3>Light Meter</h3>
+        <p>Real-time lux readings with EV for photographers. Contextual scale from pitch dark to direct sunlight.</p>
+        <span class="feature-tag">Sensors</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-2" data-cat="sensors">
+        <div class="feature-icon">🔊</div>
+        <h3>Sound Meter</h3>
+        <p>SPL in dB with peak hold, session min/max/average, noise classification from Quiet to Dangerous.</p>
+        <span class="feature-tag">Sensors</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-3" data-cat="sensors">
+        <div class="feature-icon">⚖️</div>
+        <h3>Spirit Level</h3>
+        <p>Dual-axis bubble level, fine calibration offset, overlay mode, audio tone on level, haptic within ±0.5°.</p>
+        <span class="feature-tag">Sensors</span>
+      </div>
+
+      <div class="glass-card feature-card reveal" data-cat="time">
+        <div class="feature-icon">🍅</div>
+        <h3>Focus Timer</h3>
+        <p>Pomodoro-style with configurable focus, break, and long break durations. Integrates with music player — auto-pauses on break.</p>
+        <span class="feature-tag">Time</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-1" data-cat="time">
+        <div class="feature-icon">⏱️</div>
+        <h3>Timers & Stopwatch</h3>
+        <p>Multi-countdown timers with persistent notifications, plus a stopwatch with lap tracking and a HIIT interval timer.</p>
+        <span class="feature-tag">Time</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-2" data-cat="time">
+        <div class="feature-icon">🕐</div>
+        <h3>Bedside Clock</h3>
+        <p>Digital, analog, dot-matrix and seven-segment modes. Burn-in protection, bloom effects, sleep timer, night auto-dim.</p>
+        <span class="feature-tag">Time</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-3" data-cat="dev">
+        <div class="feature-icon">🔢</div>
+        <h3>Hash Calculator</h3>
+        <p>MD5, SHA-1 through SHA-512, SHA-3, HMAC. Real-time. Compare two hashes with visual match indicator.</p>
+        <span class="feature-tag">Dev Tools</span>
+      </div>
+
+      <div class="glass-card feature-card reveal" data-cat="dev">
+        <div class="feature-icon">📋</div>
+        <h3>JSON Formatter</h3>
+        <p>Format, minify, validate with line/column error numbers, syntax highlighting, fold nested objects.</p>
+        <span class="feature-tag">Dev Tools</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-1" data-cat="dev">
+        <div class="feature-icon">🔍</div>
+        <h3>Device Info</h3>
+        <p>Full hardware diagnostic — CPU, RAM, storage, display, battery, Android version, security patch date.</p>
+        <span class="feature-tag">Dev Tools</span>
+      </div>
+
+      <div class="glass-card feature-card reveal reveal-delay-2" data-cat="dev">
+        <div class="feature-icon">🔀</div>
+        <h3>UUID, Base64 & More</h3>
+        <p>UUID v1/v4/v5 batch generation, Base64 encode/decode, file hash verification, EXIF metadata viewer.</p>
+        <span class="feature-tag">Dev Tools</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC SUITE -->
+<section class="section section-alt" id="music">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Music Suite</span>
+      <h2 class="section-title">A complete music experience. All local.</h2>
+      <p class="section-sub">Player, metadata editor, synced lyrics, visualiser, and an end-of-year recap. No streaming. No accounts. Just your music.</p>
+    </div>
+    <div class="music-grid">
+      <div class="glass-card music-card reveal">
+        <div class="music-card-accent"></div>
+        <h3>Music Player</h3>
+        <p>Full local playback of MP3, FLAC, OGG, WAV, M4A, AAC and OPUS. Browse by album, artist or folder. 5-band EQ, bass boost, reverb. Queue with drag-to-reorder. M3U import and export. Album art with dynamic colour extraction.</p>
+      </div>
+      <div class="glass-card music-card reveal reveal-delay-1">
+        <div class="music-card-accent" style="background:#a78bfa; box-shadow: 0 0 10px #a78bfa;"></div>
+        <h3>YearForge Recap</h3>
+        <p>Like Spotify Wrapped — entirely offline. Annual and monthly story slides with your top songs, artists, albums, hourly listening profile, active day heatmap, streak counter, and new artists discovered. Animated slides, confetti on hero reveals, auto-advance.</p>
+      </div>
+      <div class="glass-card music-card reveal reveal-delay-2">
+        <div class="music-card-accent" style="background:#f472b6; box-shadow: 0 0 10px #f472b6;"></div>
+        <h3>Tag Studio</h3>
+        <p>Full ID3 metadata editing — title, artist, album, artwork, BPM, key, genre, composer, lyrics. Batch operations across your whole library. Parse filenames into tags. Rename files from tag data. Safe temp-copy write process.</p>
+      </div>
+      <div class="glass-card music-card reveal reveal-delay-3">
+        <div class="music-card-accent" style="background:#34d399; box-shadow: 0 0 10px #34d399;"></div>
+        <h3>Lyrics Studio</h3>
+        <p>Tap-to-stamp LRC sync editor. Attach synced lyrics to any track. Shift timing globally. Real-time preview with scrolling highlights. Export compatible .lrc files that work in other media players.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="section" id="games">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Games</span>
+      <h2 class="section-title">Nine games. A Trophy Hall. All offline.</h2>
+      <p class="section-sub">From perfect minimax AI to procedurally generated mazes — each game is complete with stats, achievements, and a unified Trophy Hall.</p>
+    </div>
+    <div class="games-grid">
+      <div class="glass-card game-card reveal">
+        <div class="game-icon">🔴</div>
+        <h3>Four in a Row</h3>
+        <p>Local 2-player or AI with minimax alpha-beta. Hard AI won't make mistakes.</p>
+      </div>
+      <div class="glass-card game-card reveal reveal-delay-1">
+        <div class="game-icon">✕</div>
+        <h3>Tic-Tac-Toe</h3>
+        <p>Unbeatable minimax AI — can only be tied, never beaten.</p>
+      </div>
+      <div class="glass-card game-card reveal reveal-delay-2">
+        <div class="game-icon">🃏</div>
+        <h3>Recall</h3>
+        <p>Memory card match. 4×4, 4×6 or 6×6 grids. Timer mode.</p>
+      </div>
+      <div class="glass-card game-card reveal reveal-delay-3">
+        <div class="game-icon">🌀</div>
+        <h3>Neon Maze</h3>
+        <p>Procedurally generated mazes. Up to 30×30. Time attack.</p>
+      </div>
+      <div class="glass-card game-card reveal">
+        <div class="game-icon">💡</div>
+        <h3>Blackout Grid</h3>
+        <p>Classic Lights Out puzzle with hints and a custom board creator.</p>
+      </div>
+      <div class="glass-card game-card reveal reveal-delay-1">
+        <div class="game-icon">🐍</div>
+        <h3>Neon Snake</h3>
+        <p>Classic snake with 10 speed levels, power-ups and wrap-around mode.</p>
+      </div>
+      <div class="glass-card game-card reveal reveal-delay-2">
+        <div class="game-icon">⚡</div>
+        <h3>Cyber Snake</h3>
+        <p>Snake evolved — obstacles, portals, levels, expanded power-ups.</p>
+      </div>
+      <div class="glass-card game-card reveal reveal-delay-3">
+        <div class="game-icon">🟦</div>
+        <h3>Block Stacker</h3>
+        <p>Tetris-style with ghost piece, hold, 3 next previews, 15 speed levels.</p>
+      </div>
+      <div class="glass-card game-card reveal">
+        <div class="game-icon">🚀</div>
+        <h3>Neon Defense</h3>
+        <p>Space Invaders-style. Boss waves, shields, power-ups, lives system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="section section-alt" id="privacy">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Privacy & Security</span>
+      <h2 class="section-title">Encrypted. Hardware-backed. Offline.</h2>
+      <p class="section-sub">No INTERNET permission in the manifest. No analytics SDK. No crash reporting phoning home. No account required for anything.</p>
+    </div>
+    <div class="privacy-grid">
+      <div class="glass-card privacy-card reveal">
+        <div class="privacy-icon">🔐</div>
+        <div>
+          <h3>XChaCha20-Poly1305</h3>
+          <p>AEAD encryption for notes, vault, and authenticator secrets. Random nonce per encryption. MAC verification on every read.</p>
+        </div>
+      </div>
+      <div class="glass-card privacy-card reveal reveal-delay-1">
+        <div class="privacy-icon">🔑</div>
+        <div>
+          <h3>Android Keystore</h3>
+          <p>Master keys are hardware-backed. Biometric binding available. Keys never leave the secure element.</p>
+        </div>
+      </div>
+      <div class="glass-card privacy-card reveal reveal-delay-2">
+        <div class="privacy-icon">📵</div>
+        <div>
+          <h3>No Internet Permission</h3>
+          <p>The INTERNET permission is explicitly removed from the Android manifest. The app cannot phone home. Provably offline.</p>
+        </div>
+      </div>
+      <div class="glass-card privacy-card reveal reveal-delay-3">
+        <div class="privacy-icon">🛡️</div>
+        <div>
+          <h3>FLAG_SECURE</h3>
+          <p>Every sensitive screen blocks screenshots and screen recording at the OS level. No screenshot app or screen recorder can capture your private data.</p>
+        </div>
+      </div>
+      <div class="glass-card privacy-card reveal">
+        <div class="privacy-icon">🗝️</div>
+        <div>
+          <h3>300K PBKDF2 Iterations</h3>
+          <p>Encrypted backups use PBKDF2-HMAC-SHA256 with 300,000 iterations. Passphrase brute-force is computationally infeasible.</p>
+        </div>
+      </div>
+      <div class="glass-card privacy-card reveal reveal-delay-1">
+        <div class="privacy-icon">🫥</div>
+        <div>
+          <h3>Decoy Vault</h3>
+          <p>NullJot supports a full decoy vault with a separate PIN. Under duress, open the decoy — your real data stays hidden.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Pricing</span>
+      <h2 class="section-title">Less than a coffee. Everything included.</h2>
+      <p class="section-sub">No subscriptions. No in-app purchases. No feature gates. Buy it once, own it forever.</p>
+    </div>
+    <div class="pricing-card reveal">
+      <div class="pricing-glow"></div>
+      <div class="pricing-price">
+        <span class="pricing-currency">$</span>6.99
+      </div>
+      <div class="pricing-period">AUD · One-time purchase · No subscription</div>
+      <ul class="pricing-features">
+        <li><span class="pricing-check">✦</span> All 33 tools, fully unlocked</li>
+        <li><span class="pricing-check">✦</span> All 9 games with Trophy Hall</li>
+        <li><span class="pricing-check">✦</span> Complete music suite</li>
+        <li><span class="pricing-check">✦</span> All three theme packs</li>
+        <li><span class="pricing-check">✦</span> Every future update included</li>
+        <li><span class="pricing-check">✦</span> No account. No internet. No tracking.</li>
+      </ul>
+      <a href="#" class="btn-primary" style="width:100%; justify-content:center;">
+        Get on Google Play
+      </a>
+      <p class="pricing-note">Available on Android. iOS and other platforms coming soon.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Noct<span>Forge</span></div>
+  <div class="footer-tagline">Offline tools · No tracking · Pure power</div>
+  <ul class="footer-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="mailto:hello@glowseedstudio.com">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Glowseed Studio · NoctForge · All rights reserved</div>
+</footer>
+
+<script>
+// ── PARTICLES ──
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function Particle() {
+    this.reset();
+  }
+  Particle.prototype.reset = function() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.r = Math.random() * 1.5 + 0.4;
+    this.alpha = Math.random() * 0.5 + 0.1;
+    this.color = Math.random() > 0.5 ? '0,229,255' : '167,139,250';
+  };
+
+  for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W || p.y < 0 || p.y > H) p.reset();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── COUNT-UP ──
+function countUp(el, target, duration) {
+  let start = 0, step = target / (duration / 16);
+  const interval = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = Math.round(start);
+    if (start >= target) clearInterval(interval);
+  }, 16);
+}
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.target);
+      if (!isNaN(target) && target > 0) countUp(el, target, 1200);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.count-up[data-target]').forEach(el => countObserver.observe(el));
+
+// ── FEATURE CATEGORY FILTER ──
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.feature-card').forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.classList.toggle('hidden', !show);
+      if (show) { card.classList.remove('visible'); setTimeout(() => card.classList.add('visible'), 30); }
+    });
+  });
+});
+
+// ── SMOOTH NAV ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
