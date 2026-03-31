@@ -944,6 +944,73 @@
       opacity: 0.75;
     }
 
+    /* ── TOOL LIBRARY ── */
+    .library-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .library-layout { grid-template-columns: 1fr; }
+    }
+    .library-feature-list {
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .library-item {
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .library-item-icon {
+      color: var(--accent);
+      font-size: 16px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .library-item-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .library-item-desc {
+      font-size: 14px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .library-callout {
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 20px;
+      position: sticky; top: 100px;
+      border-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent-dim), transparent);
+    }
+    .library-callout-headline {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px; font-weight: 800;
+      line-height: 1.3;
+      color: var(--text);
+    }
+    .library-callout-sub {
+      font-size: 14px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .library-callout-stat {
+      display: flex; align-items: baseline; gap: 10px;
+    }
+    .library-callout-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 42px; font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .library-callout-label {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
     /* ── PERMISSIONS ── */
     .perm-grid {
       display: grid;
@@ -1482,8 +1549,79 @@
   </div>
 </section>
 
+<!-- TOOL LIBRARY -->
+<section class="section" id="tool-library">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Tool Library</span>
+      <h2 class="section-title">42 tools. Use the ones you want.</h2>
+      <p class="section-sub">Most multi-tool apps dump everything on you at once. NoctForge doesn't. The Tool Library lets you hand-pick exactly what appears in your launcher — disable what you don't need, re-enable it the moment you do. Your app, your way.</p>
+    </div>
+
+    <div class="library-layout reveal">
+      <div class="library-feature-list">
+        <div class="library-item">
+          <div class="library-item-icon">✦</div>
+          <div>
+            <div class="library-item-title">Enable only what you use</div>
+            <div class="library-item-desc">Browse all 42 tools and switch on the ones that matter to you. Everything else stays out of the way.</div>
+          </div>
+        </div>
+        <div class="library-item">
+          <div class="library-item-icon">✦</div>
+          <div>
+            <div class="library-item-title">Disable anytime, re-enable anytime</div>
+            <div class="library-item-desc">Nothing is ever deleted. Disabled tools are just hidden — flip them back on in seconds whenever you need them.</div>
+          </div>
+        </div>
+        <div class="library-item">
+          <div class="library-item-icon">✦</div>
+          <div>
+            <div class="library-item-title">Browseable by category</div>
+            <div class="library-item-desc">Tools are grouped by category so you can explore what's available without scrolling through everything at once.</div>
+          </div>
+        </div>
+        <div class="library-item">
+          <div class="library-item-icon">✦</div>
+          <div>
+            <div class="library-item-title">Detail pages for every tool</div>
+            <div class="library-item-desc">Each tool has a dedicated page explaining what it does, what permissions it needs, and what you can do with it — before you enable it.</div>
+          </div>
+        </div>
+        <div class="library-item">
+          <div class="library-item-icon">✦</div>
+          <div>
+            <div class="library-item-title">Clean launcher, always</div>
+            <div class="library-item-desc">Your home screen only shows what you've chosen. No clutter, no noise, no tools you never open taking up space.</div>
+          </div>
+        </div>
+        <div class="library-item">
+          <div class="library-item-icon">✦</div>
+          <div>
+            <div class="library-item-title">New tools added over time</div>
+            <div class="library-item-desc">When new tools are added in updates, they appear in the library first — you decide if they join your launcher.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="library-callout glass-card">
+        <div class="library-callout-headline">Your launcher.<br>Your rules.</div>
+        <p class="library-callout-sub">A minimalist who only wants a flashlight and a timer shouldn't have to wade through 40 other tools to find them. A power user who wants everything can have everything. The Tool Library makes both possible — in the same app.</p>
+        <div class="library-callout-stat">
+          <span class="library-callout-num">42</span>
+          <span class="library-callout-label">tools available</span>
+        </div>
+        <div class="library-callout-stat">
+          <span class="library-callout-num">0</span>
+          <span class="library-callout-label">forced on you</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FEATURES -->
-<section class="section" id="features">
+<section class="section section-alt" id="features">
   <div class="container">
     <div class="section-header reveal">
       <span class="section-eyebrow">The Tools</span>
