@@ -873,25 +873,36 @@
     .pill-visual {
       display: flex; align-items: center; justify-content: center;
     }
-    .pill-mockup {
-      width: 160px; height: 48px;
-      border-radius: 999px;
-      background: rgba(10,20,40,0.9);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center; gap: 14px;
-      box-shadow: 0 0 40px rgba(0,229,255,0.2), 0 0 80px rgba(0,229,255,0.08);
-      animation: float 3s ease-in-out infinite;
+    @keyframes rgb-glow {
+      0%   { box-shadow: 0 0 18px 4px rgba(255,0,80,0.7),   0 0 60px rgba(255,0,80,0.2);   border-color: rgba(255,0,80,0.6); }
+      16%  { box-shadow: 0 0 18px 4px rgba(255,150,0,0.7),  0 0 60px rgba(255,150,0,0.2);  border-color: rgba(255,150,0,0.6); }
+      33%  { box-shadow: 0 0 18px 4px rgba(0,255,120,0.7),  0 0 60px rgba(0,255,120,0.2);  border-color: rgba(0,255,120,0.6); }
+      50%  { box-shadow: 0 0 18px 4px rgba(0,229,255,0.7),  0 0 60px rgba(0,229,255,0.2);  border-color: rgba(0,229,255,0.6); }
+      66%  { box-shadow: 0 0 18px 4px rgba(130,80,255,0.7), 0 0 60px rgba(130,80,255,0.2); border-color: rgba(130,80,255,0.6); }
+      83%  { box-shadow: 0 0 18px 4px rgba(255,0,200,0.7),  0 0 60px rgba(255,0,200,0.2);  border-color: rgba(255,0,200,0.6); }
+      100% { box-shadow: 0 0 18px 4px rgba(255,0,80,0.7),   0 0 60px rgba(255,0,80,0.2);   border-color: rgba(255,0,80,0.6); }
     }
-    .pill-mockup-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    .pill-mockup-dot:nth-child(1) { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-    .pill-mockup-dot:nth-child(2) { background: #a78bfa; box-shadow: 0 0 8px #a78bfa; animation-delay: 0.3s; }
-    .pill-mockup-dot:nth-child(3) { background: #f472b6; box-shadow: 0 0 8px #f472b6; animation-delay: 0.6s; }
     @keyframes float {
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
+    }
+    .pill-mockup {
+      width: 180px; height: 52px;
+      border-radius: 999px;
+      background: rgba(8,14,28,0.95);
+      border: 1px solid rgba(0,229,255,0.4);
+      position: relative;
+      overflow: hidden;
+      animation: float 3s ease-in-out infinite, rgb-glow 5s linear infinite;
+    }
+    .pill-mockup::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 28% 50%, rgba(167,139,250,0.45) 0%, transparent 55%),
+        radial-gradient(ellipse at 72% 50%, rgba(0,229,255,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 0%, rgba(244,114,182,0.2) 0%, transparent 60%);
+      opacity: 0.75;
     }
 
     /* ── FOOTER ── */
@@ -1332,11 +1343,7 @@
       </div>
       <div class="pill-visual">
         <div>
-          <div class="pill-mockup" style="margin: 0 auto 20px;">
-            <div class="pill-mockup-dot"></div>
-            <div class="pill-mockup-dot"></div>
-            <div class="pill-mockup-dot"></div>
-          </div>
+          <div class="pill-mockup" style="margin: 0 auto 20px;"></div>
           <p style="text-align:center; font-size:12px; color:var(--text-muted); font-weight:600; letter-spacing:0.08em; text-transform:uppercase;">NoctPill overlay</p>
         </div>
       </div>
