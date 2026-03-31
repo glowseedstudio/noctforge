@@ -109,12 +109,14 @@
       text-decoration: none;
       display: flex; align-items: center; gap: 10px;
     }
-    .nav-brand-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
-      animation: pulse-dot 2.4s ease-in-out infinite;
+    .nav-logo {
+      width: 32px; height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px var(--accent));
+      transition: filter 0.3s;
+    }
+    .nav-brand:hover .nav-logo {
+      filter: drop-shadow(0 0 14px var(--accent));
     }
     @keyframes pulse-dot {
       0%,100% { box-shadow: 0 0 8px var(--accent); opacity:1; }
@@ -164,6 +166,20 @@
     }
 
     .hero-inner { width: 100%; max-width: 860px; margin: 0 auto; }
+
+    .hero-logo {
+      width: clamp(90px, 14vw, 140px);
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto 20px;
+      display: block;
+      filter: drop-shadow(0 0 28px rgba(0,229,255,0.45));
+      animation: fade-up 0.7s ease both, hero-logo-glow 3s ease-in-out infinite;
+    }
+    @keyframes hero-logo-glow {
+      0%,100% { filter: drop-shadow(0 0 28px rgba(0,229,255,0.45)); }
+      50%      { filter: drop-shadow(0 0 48px rgba(0,229,255,0.7)) drop-shadow(0 0 80px rgba(167,139,250,0.25)); }
+    }
 
     .hero-pill {
       display: inline-flex; align-items: center; gap: 8px;
@@ -873,7 +889,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="#hero" class="nav-brand">
-    <div class="nav-brand-dot"></div>
+    <img src="logo.png" alt="NoctForge" class="nav-logo" />
     NoctForge
   </a>
   <ul class="nav-links">
@@ -889,6 +905,7 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
+    <img src="logo.png" alt="NoctForge" class="hero-logo" />
     <div class="hero-pill">
       <div class="hero-pill-dot"></div>
       Now available on Android
@@ -1446,6 +1463,7 @@
 
 <!-- FOOTER -->
 <footer>
+  <img src="logo.png" alt="NoctForge" style="width:48px; height:auto; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 10px rgba(0,229,255,0.4));" />
   <div class="footer-brand">Noct<span>Forge</span></div>
   <div class="footer-tagline">Offline tools · No tracking · Pure power</div>
   <ul class="footer-links">
