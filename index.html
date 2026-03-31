@@ -717,31 +717,113 @@
       margin-top: 20px;
     }
 
-    /* ── SCREENSHOT PLACEHOLDER ── */
-    .screenshot-placeholder {
+    /* ── SCREENSHOTS ── */
+    .ss-section { padding: 100px 0 0; }
+
+    .ss-tabs {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 48px;
+    }
+    .ss-tab {
+      background: transparent;
+      border: 1px solid var(--border-dim);
+      color: var(--text-dim);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 8px 20px; border-radius: 999px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .ss-tab:hover, .ss-tab.active {
+      background: var(--accent-dim);
+      border-color: var(--border);
+      color: var(--accent);
+    }
+
+    .ss-groups { position: relative; }
+
+    .ss-group {
+      display: none;
+      animation: fade-up 0.45s ease both;
+    }
+    .ss-group.active { display: block; }
+
+    .ss-group-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .ss-group-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px; font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .ss-group-desc {
+      font-size: 15px; color: var(--text-dim);
+      max-width: 500px; margin: 0 auto;
+    }
+
+    .ss-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    @media (max-width: 680px) {
+      .ss-row {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+      }
+    }
+    @media (min-width: 681px) and (max-width: 900px) {
+      .ss-row { gap: 14px; }
+    }
+
+    .ss-slot {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .ss-frame {
       width: 100%;
-      aspect-ratio: 9/16;
-      max-width: 220px;
-      border-radius: 24px;
+      aspect-ratio: 9 / 19.5;
+      border-radius: 20px;
       border: 1px solid var(--border);
+      overflow: hidden;
       background: var(--surface2);
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .ss-frame:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px var(--border);
+    }
+    .ss-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .ss-placeholder {
+      width: 100%; height: 100%;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 10px;
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-align: center;
-      padding: 20px;
+      gap: 10px; padding: 16px; text-align: center;
     }
-    .screenshot-placeholder-icon { font-size: 32px; opacity: 0.4; }
-    .screenshots-row {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 48px;
+    .ss-placeholder-icon { font-size: 28px; opacity: 0.3; }
+    .ss-placeholder-text {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); line-height: 1.4;
+    }
+    .ss-placeholder-file {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--accent); opacity: 0.5;
+      font-family: monospace;
+    }
+    .ss-caption {
+      text-align: center;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-muted);
     }
 
     /* ── NOCTPILL HIGHLIGHT ── */
@@ -950,25 +1032,213 @@
   </div>
 </section>
 
-<!-- SCREENSHOTS PLACEHOLDER -->
-<section class="section container" id="screenshots">
-  <div class="screenshots-row">
-    <div class="screenshot-placeholder">
-      <div class="screenshot-placeholder-icon">📱</div>
-      Screenshot coming soon
+<!-- SCREENSHOTS -->
+<section class="ss-section" id="screenshots">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Screenshots</span>
+      <h2 class="section-title">See it in action.</h2>
+      <p class="section-sub">Every screen crafted. Every interaction considered.</p>
     </div>
-    <div class="screenshot-placeholder">
-      <div class="screenshot-placeholder-icon">📱</div>
-      Screenshot coming soon
+
+    <div class="ss-tabs reveal">
+      <button class="ss-tab active" data-group="music">Music</button>
+      <button class="ss-tab" data-group="documents">Documents</button>
+      <button class="ss-tab" data-group="dev">Dev &amp; Tools</button>
+      <button class="ss-tab" data-group="sensors">Sensors</button>
+      <button class="ss-tab" data-group="games">Games</button>
+      <button class="ss-tab" data-group="design">Design</button>
     </div>
-    <div class="screenshot-placeholder">
-      <div class="screenshot-placeholder-icon">📱</div>
-      Screenshot coming soon
-    </div>
-    <div class="screenshot-placeholder">
-      <div class="screenshot-placeholder-icon">📱</div>
-      Screenshot coming soon
-    </div>
+
+    <div class="ss-groups">
+
+      <!-- MUSIC -->
+      <div class="ss-group active" id="ss-music">
+        <div class="ss-group-header">
+          <div class="ss-group-title">Music Suite</div>
+          <div class="ss-group-desc">Full local player, end-of-year recap, metadata editor and synced lyrics — all offline.</div>
+        </div>
+        <div class="ss-row">
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/music-now-playing.png" alt="Now Playing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🎵</div><div class="ss-placeholder-text">Now Playing Screen</div><div class="ss-placeholder-file">music-now-playing.png</div></div>
+            </div>
+            <div class="ss-caption">Now Playing</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/music-yearforge.png" alt="YearForge" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">📊</div><div class="ss-placeholder-text">YearForge Recap Slide</div><div class="ss-placeholder-file">music-yearforge.png</div></div>
+            </div>
+            <div class="ss-caption">YearForge</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/music-tag-studio.png" alt="Tag Studio" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🏷️</div><div class="ss-placeholder-text">Tag Studio Editor</div><div class="ss-placeholder-file">music-tag-studio.png</div></div>
+            </div>
+            <div class="ss-caption">Tag Studio</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS -->
+      <div class="ss-group" id="ss-documents">
+        <div class="ss-group-header">
+          <div class="ss-group-title">Documents</div>
+          <div class="ss-group-desc">Encrypted notes, full PDF suite, and a private encrypted reader shelf.</div>
+        </div>
+        <div class="ss-row">
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/docs-nulljot.png" alt="NullJot" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">📝</div><div class="ss-placeholder-text">NullJot Notes</div><div class="ss-placeholder-file">docs-nulljot.png</div></div>
+            </div>
+            <div class="ss-caption">NullJot</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/docs-stitchpdf.png" alt="StitchPDF" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">📄</div><div class="ss-placeholder-text">StitchPDF Markup</div><div class="ss-placeholder-file">docs-stitchpdf.png</div></div>
+            </div>
+            <div class="ss-caption">StitchPDF</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/docs-reader.png" alt="Reader" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">📚</div><div class="ss-placeholder-text">Reader — EPUB/PDF</div><div class="ss-placeholder-file">docs-reader.png</div></div>
+            </div>
+            <div class="ss-caption">Reader</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEV & TOOLS -->
+      <div class="ss-group" id="ss-dev">
+        <div class="ss-group-header">
+          <div class="ss-group-title">Dev &amp; Quick Tools</div>
+          <div class="ss-group-desc">Professional-grade utilities. Hash, JSON, Base64, UUID, device info, password generator and more.</div>
+        </div>
+        <div class="ss-row">
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/dev-hash-json.png" alt="Hash / JSON" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🔢</div><div class="ss-placeholder-text">Hash / JSON Formatter</div><div class="ss-placeholder-file">dev-hash-json.png</div></div>
+            </div>
+            <div class="ss-caption">Hash / JSON</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/dev-quick-tools.png" alt="Quick Tools" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🔑</div><div class="ss-placeholder-text">Quick Tools Hub</div><div class="ss-placeholder-file">dev-quick-tools.png</div></div>
+            </div>
+            <div class="ss-caption">Quick Tools</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/dev-device-info.png" alt="Device Info" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">📋</div><div class="ss-placeholder-text">Device Info</div><div class="ss-placeholder-file">dev-device-info.png</div></div>
+            </div>
+            <div class="ss-caption">Device Info</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SENSORS -->
+      <div class="ss-group" id="ss-sensors">
+        <div class="ss-group-header">
+          <div class="ss-group-title">Sensors</div>
+          <div class="ss-group-desc">Eight dedicated sensor screens — all computed locally, no internet, no APIs.</div>
+        </div>
+        <div class="ss-row">
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/sensors-compass.png" alt="Compass" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🧭</div><div class="ss-placeholder-text">Compass HUD</div><div class="ss-placeholder-file">sensors-compass.png</div></div>
+            </div>
+            <div class="ss-caption">Compass</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/sensors-barometer.png" alt="Barometer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🌡️</div><div class="ss-placeholder-text">Barometer &amp; Pressure</div><div class="ss-placeholder-file">sensors-barometer.png</div></div>
+            </div>
+            <div class="ss-caption">Barometer</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/sensors-spirit-level.png" alt="Spirit Level" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">⚖️</div><div class="ss-placeholder-text">Spirit Level</div><div class="ss-placeholder-file">sensors-spirit-level.png</div></div>
+            </div>
+            <div class="ss-caption">Spirit Level</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAMES -->
+      <div class="ss-group" id="ss-games">
+        <div class="ss-group-header">
+          <div class="ss-group-title">Games</div>
+          <div class="ss-group-desc">Nine games with unified stats, achievements, and a Trophy Hall. All offline.</div>
+        </div>
+        <div class="ss-row">
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/games-neon-snake.png" alt="Neon Snake" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🐍</div><div class="ss-placeholder-text">Neon Snake</div><div class="ss-placeholder-file">games-neon-snake.png</div></div>
+            </div>
+            <div class="ss-caption">Neon Snake</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/games-block-stacker.png" alt="Block Stacker" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🟦</div><div class="ss-placeholder-text">Block Stacker</div><div class="ss-placeholder-file">games-block-stacker.png</div></div>
+            </div>
+            <div class="ss-caption">Block Stacker</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/games-trophy-hall.png" alt="Trophy Hall" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🏆</div><div class="ss-placeholder-text">Trophy Hall / Game Stats</div><div class="ss-placeholder-file">games-trophy-hall.png</div></div>
+            </div>
+            <div class="ss-caption">Trophy Hall</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESIGN -->
+      <div class="ss-group" id="ss-design">
+        <div class="ss-group-header">
+          <div class="ss-group-title">Design</div>
+          <div class="ss-group-desc">Three theme packs, six accent colours, eight backgrounds. Every combination a distinct atmosphere.</div>
+        </div>
+        <div class="ss-row">
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/design-neon-theme.png" alt="Neon Theme" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">✦</div><div class="ss-placeholder-text">Neon Theme Pack</div><div class="ss-placeholder-file">design-neon-theme.png</div></div>
+            </div>
+            <div class="ss-caption">Neon Pack</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/design-noir-theme.png" alt="Noir Theme" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🌑</div><div class="ss-placeholder-text">Noir Theme Pack</div><div class="ss-placeholder-file">design-noir-theme.png</div></div>
+            </div>
+            <div class="ss-caption">Noir Pack</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/design-noctpill.png" alt="NoctPill" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">💊</div><div class="ss-placeholder-text">NoctPill Overlay</div><div class="ss-placeholder-file">design-noctpill.png</div></div>
+            </div>
+            <div class="ss-caption">NoctPill</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end ss-groups -->
   </div>
 </section>
 
@@ -1562,6 +1832,16 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
       card.classList.toggle('hidden', !show);
       if (show) { card.classList.remove('visible'); setTimeout(() => card.classList.add('visible'), 30); }
     });
+  });
+});
+
+// ── SCREENSHOT TABS ──
+document.querySelectorAll('.ss-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.ss-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.ss-group').forEach(g => g.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('ss-' + tab.dataset.group).classList.add('active');
   });
 });
 
