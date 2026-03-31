@@ -944,6 +944,31 @@
       opacity: 0.75;
     }
 
+    /* ── PERMISSIONS ── */
+    .perm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .perm-card {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 22px;
+    }
+    .perm-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .perm-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .perm-reason {
+      font-size: 13px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border-dim);
@@ -1359,6 +1384,73 @@
       <div class="accent-swatch" data-name="Purple Pulse"><div class="swatch-tooltip">Purple Pulse</div></div>
       <div class="accent-swatch" data-name="Green Vector"><div class="swatch-tooltip">Green Vector</div></div>
       <div class="accent-swatch" data-name="Midnight"><div class="swatch-tooltip">Midnight</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIEWS -->
+<section class="section section-alt" id="views">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">The Interface</span>
+      <h2 class="section-title">Your app, your layout.</h2>
+      <p class="section-sub">Switch between Launcher view for a full home-screen feel, or Minimal view for a clean focused list. Both look like nothing else on Android.</p>
+    </div>
+    <div class="ss-tabs reveal" style="margin-bottom:28px;">
+      <button class="ss-tab active" data-group="view-launcher">Launcher</button>
+      <button class="ss-tab" data-group="view-minimal">Minimal</button>
+    </div>
+    <div class="ss-groups">
+      <div class="ss-group active" id="ss-view-launcher">
+        <div class="ss-grid">
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/view-launcher-1.png" alt="Launcher View" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🚀</div><div class="ss-placeholder-text">Launcher View</div><div class="ss-placeholder-file">view-launcher-1.png</div></div>
+            </div>
+            <div class="ss-caption">Launcher</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/view-launcher-2.png" alt="Launcher View 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🚀</div><div class="ss-placeholder-text">Launcher Grid</div><div class="ss-placeholder-file">view-launcher-2.png</div></div>
+            </div>
+            <div class="ss-caption">Launcher Grid</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/view-launcher-3.png" alt="Launcher View 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">🚀</div><div class="ss-placeholder-text">Launcher Detail</div><div class="ss-placeholder-file">view-launcher-3.png</div></div>
+            </div>
+            <div class="ss-caption">Launcher Detail</div>
+          </div>
+        </div>
+      </div>
+      <div class="ss-group" id="ss-view-minimal">
+        <div class="ss-grid">
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/view-minimal-1.png" alt="Minimal View" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">⚡</div><div class="ss-placeholder-text">Minimal View</div><div class="ss-placeholder-file">view-minimal-1.png</div></div>
+            </div>
+            <div class="ss-caption">Minimal</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/view-minimal-2.png" alt="Minimal View 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">⚡</div><div class="ss-placeholder-text">Minimal List</div><div class="ss-placeholder-file">view-minimal-2.png</div></div>
+            </div>
+            <div class="ss-caption">Minimal List</div>
+          </div>
+          <div class="ss-slot">
+            <div class="ss-frame">
+              <img src="screenshots/view-minimal-3.png" alt="Minimal View 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">⚡</div><div class="ss-placeholder-text">Minimal Search</div><div class="ss-placeholder-file">view-minimal-3.png</div></div>
+            </div>
+            <div class="ss-caption">Minimal Search</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1830,6 +1922,123 @@
   </div>
 </section>
 
+<!-- PERMISSIONS -->
+<section class="section" id="permissions">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Transparency</span>
+      <h2 class="section-title">Why we ask for what we ask.</h2>
+      <p class="section-sub">NoctForge requests only what specific features need to function. Every permission can be revoked at any time in Android Settings — the app will simply disable the feature that needs it, nothing else changes.</p>
+    </div>
+    <div class="perm-grid reveal">
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">📷</div>
+        <div class="perm-body">
+          <div class="perm-name">Camera</div>
+          <div class="perm-reason">Used by the Flashlight, QR Scanner, and camera tools. Only activated when you open one of these features. Never runs in the background.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">🎙️</div>
+        <div class="perm-body">
+          <div class="perm-name">Microphone</div>
+          <div class="perm-reason">Used by the Instrument Tuner for pitch detection and Voice Memos for recording. Only active while you're in those tools. No audio is stored or transmitted.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">🔊</div>
+        <div class="perm-body">
+          <div class="perm-name">Modify Audio Settings</div>
+          <div class="perm-reason">Lets the Metronome and music player manage audio focus and routing correctly — so playback pauses when a call comes in and resumes after.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">👆</div>
+        <div class="perm-body">
+          <div class="perm-name">Biometrics / Fingerprint</div>
+          <div class="perm-reason">Used to lock and unlock sensitive features like the Authenticator and encrypted notes. Biometric data never leaves your device — it's handled entirely by Android.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">🧭</div>
+        <div class="perm-body">
+          <div class="perm-name">Precise Location</div>
+          <div class="perm-reason">Used by the Compass and Heading HUD for GPS-based bearing accuracy. Only read when those tools are open. No location data is stored, logged, or sent anywhere.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">🔵</div>
+        <div class="perm-body">
+          <div class="perm-name">Bluetooth Connect</div>
+          <div class="perm-reason">Used by Device Info to display the names of connected Bluetooth devices. Read-only — NoctForge does not initiate or manage Bluetooth connections.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">💊</div>
+        <div class="perm-body">
+          <div class="perm-name">Display Over Other Apps</div>
+          <div class="perm-reason">Required for NoctPill, the floating overlay. Without this permission NoctPill cannot appear above other apps. You grant this manually in system settings — Android requires explicit approval.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">🎵</div>
+        <div class="perm-body">
+          <div class="perm-name">Read Media Audio</div>
+          <div class="perm-reason">Lets the music player read your local music library. Only accesses audio files. No other files are read, and nothing leaves your device.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">🌙</div>
+        <div class="perm-body">
+          <div class="perm-name">Wake Lock</div>
+          <div class="perm-reason">Keeps the screen on during the Bedside Clock and prevents the processor from sleeping during music playback. Released immediately when you leave those features.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">🔔</div>
+        <div class="perm-body">
+          <div class="perm-name">Notifications</div>
+          <div class="perm-reason">Used for timer alerts, reminders, and the music player notification. Only requested when you enable these features. You can revoke it and the rest of the app works fine.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">⏱️</div>
+        <div class="perm-body">
+          <div class="perm-name">Exact Alarms</div>
+          <div class="perm-reason">Makes timers and reminders fire precisely on time rather than in a window. Android 14+ may ask you to approve this separately in system settings.</div>
+        </div>
+      </div>
+
+      <div class="glass-card perm-card">
+        <div class="perm-icon">⚙️</div>
+        <div class="perm-body">
+          <div class="perm-name">Boot Completed / Foreground Services</div>
+          <div class="perm-reason">Boot Completed restores scheduled reminders after a restart. Foreground Services keep music playing and NoctPill running when you switch apps — Android requires this for anything persistent.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="glass-card reveal" style="margin-top:32px; padding:24px 28px; border-color: rgba(0,229,255,0.2);">
+      <p style="font-size:15px; font-weight:600; color:var(--text-dim); line-height:1.7; text-align:center;">
+        <strong style="color:var(--accent);">What we explicitly do not request:</strong> Internet access, external storage, network state, Wi-Fi state, or advertising ID.
+        The INTERNET permission is removed from the app manifest entirely — NoctForge is provably unable to send data anywhere.
+      </p>
+    </div>
+  </div>
+</section>
+
 <!-- PRICING -->
 <section class="section" id="pricing">
   <div class="container">
@@ -1996,8 +2205,10 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
 // ── SCREENSHOT TABS ──
 document.querySelectorAll('.ss-tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.ss-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.ss-group').forEach(g => g.classList.remove('active'));
+    const tabsEl = tab.closest('.ss-tabs');
+    const groupsEl = tabsEl.nextElementSibling;
+    tabsEl.querySelectorAll('.ss-tab').forEach(t => t.classList.remove('active'));
+    groupsEl.querySelectorAll('.ss-group').forEach(g => g.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('ss-' + tab.dataset.group).classList.add('active');
   });
