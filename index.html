@@ -1030,8 +1030,6 @@
       width: 100%;
       height: auto;
       display: block;
-      /* Push up to clip status bar at top of recording */
-      margin-top: -28px;
     }
     /* Bottom fade — softly dissolves the cut-off edge */
     .pill-video-device::after {
@@ -1496,10 +1494,10 @@
           </div>
           <div class="ss-slot">
             <div class="ss-frame">
-              <img src="screenshots/sensors-barometer.png" alt="Barometer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-              <div class="ss-placeholder"><div class="ss-placeholder-icon">🌡️</div><div class="ss-placeholder-text">Barometer &amp; Pressure</div><div class="ss-placeholder-file">sensors-barometer.png</div></div>
+              <img src="screenshots/sensors-dashboard.png" alt="Sensors Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="ss-placeholder"><div class="ss-placeholder-icon">📡</div><div class="ss-placeholder-text">Sensors Dashboard</div><div class="ss-placeholder-file">sensors-dashboard.png</div></div>
             </div>
-            <div class="ss-caption">Barometer</div>
+            <div class="ss-caption">Dashboard</div>
           </div>
           <div class="ss-slot">
             <div class="ss-frame">
@@ -1720,9 +1718,14 @@
       <div>
         <span class="section-eyebrow" style="text-align:left;">Exclusive Feature</span>
         <h2>Noctpill — <span>Your floating command centre</span></h2>
-        <p>A persistent pill-shaped overlay that hovers above every app on your screen. Music controls, shortcuts, calendar, a quick scratchpad — accessible without ever leaving what you're doing.</p>
+        <p>A persistent pill-shaped overlay that hovers above every app on your screen. Music controls, shortcuts, timers, a quick scratchpad — accessible without ever leaving what you're doing.</p>
         <ul class="pill-features">
           <li>Music playback controls from any app</li>
+          <li>Swipe left/right to skip tracks · double-tap to play/pause</li>
+          <li>Live timer display for any active NoctForge timers</li>
+          <li>Rotates through content when multiple things are active</li>
+          <li>External media playback (with Notification Access enabled)</li>
+          <li>Notification pass-through — display only, never stored or read by NoctForge; still only actionable via Android's notification shade</li>
           <li>8 configurable shortcut buttons</li>
           <li>Quick note scratchpad (biometric-locked)</li>
           <li>RGB glow synced to album artwork</li>
@@ -1803,6 +1806,13 @@
             <div class="library-item-desc">When new tools are added in updates, they appear in the library first — you decide if they join your launcher.</div>
           </div>
         </div>
+        <div class="library-item">
+          <div class="library-item-icon">✦</div>
+          <div>
+            <div class="library-item-title">Pin tools directly to your home screen</div>
+            <div class="library-item-desc">Any NoctForge tool can be pinned as a shortcut on your Android home screen — open your torch, timer, or converter in a single tap, without even opening the app.</div>
+          </div>
+        </div>
       </div>
 
       <div class="library-callout glass-card">
@@ -1816,6 +1826,23 @@
           <span class="library-callout-num">0</span>
           <span class="library-callout-label">forced on you</span>
         </div>
+      </div>
+    </div>
+
+    <div class="home-shortcuts-showcase reveal" style="display:flex; gap:24px; align-items:flex-start; justify-content:center; margin-top:48px; flex-wrap:wrap;">
+      <div style="text-align:center; flex:1; min-width:220px; max-width:320px;">
+        <div class="ss-frame" style="margin:0 auto 12px;">
+          <img src="screenshots/home-shortcuts.png" alt="Home screen shortcut selector" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" style="width:100%; border-radius:16px;" />
+          <div class="ss-placeholder"><div class="ss-placeholder-icon">📌</div><div class="ss-placeholder-text">Shortcut selector</div><div class="ss-placeholder-file">home-shortcuts.png</div></div>
+        </div>
+        <p style="font-size:13px; color:var(--text-muted); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin:0;">Select tools to pin</p>
+      </div>
+      <div style="text-align:center; flex:1; min-width:220px; max-width:320px;">
+        <div class="ss-frame" style="margin:0 auto 12px;">
+          <img src="screenshots/home-shortcuts2.png" alt="NoctForge shortcuts on Android home screen" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" style="width:100%; border-radius:16px;" />
+          <div class="ss-placeholder"><div class="ss-placeholder-icon">📱</div><div class="ss-placeholder-text">Shortcuts on home screen</div><div class="ss-placeholder-file">home-shortcuts2.png</div></div>
+        </div>
+        <p style="font-size:13px; color:var(--text-muted); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin:0;">One tap from your home screen</p>
       </div>
     </div>
   </div>
