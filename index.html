@@ -600,6 +600,68 @@
       line-height: 1.65;
     }
 
+    /* ── ANDROID AUTO ── */
+    .auto-card {
+      padding: 36px 40px;
+      border-color: rgba(0,229,255,0.28);
+      background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(0,0,0,0.2));
+    }
+    .auto-card-inner {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 700px) {
+      .auto-card-inner { grid-template-columns: 1fr; }
+      .auto-card { padding: 24px 20px; }
+    }
+    .auto-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .auto-features { grid-template-columns: 1fr; } }
+    .auto-feature {
+      background: rgba(0,229,255,0.04);
+      border: 1px solid rgba(0,229,255,0.14);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .auto-feature-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .auto-feature-desc {
+      font-size: 13px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+    .auto-card-badge {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px; text-align: center;
+    }
+    .auto-badge-icon {
+      font-size: 52px; line-height: 1;
+    }
+    .auto-badge-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px; font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+    .auto-badge-sub {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 999px;
+    }
+
     /* ── GAMES ── */
     .games-grid {
       display: grid;
@@ -1982,6 +2044,41 @@
         <p>Seven live audio-reactive modes — spectrum bars, oscilloscope, peak/VU meter, dot matrix, radial spectrum, particle burst, and ribbon waves. Driven by the music player. Fullscreen and overlay modes. Colour follows your accent theme automatically.</p>
       </div>
     </div>
+
+    <!-- ANDROID AUTO -->
+    <div class="auto-card glass-card reveal" style="margin-top: 40px;">
+      <div class="auto-card-inner">
+        <div class="auto-card-text">
+          <div class="section-eyebrow" style="text-align:left; margin-bottom:12px;">Android Auto</div>
+          <h3 style="font-family:'Orbitron',sans-serif; font-size:clamp(20px,3vw,28px); font-weight:800; color:var(--text); margin-bottom:14px;">Your music. On the road.</h3>
+          <p style="font-size:15px; font-weight:500; color:var(--text-dim); line-height:1.7; margin-bottom:20px;">NoctForge integrates fully with Android Auto. Browse your library by album, artist, playlist, or recent plays — right from your car's display. Full playback controls on the steering wheel. No phone needed once you're driving.</p>
+          <div class="auto-features">
+            <div class="auto-feature">
+              <div class="auto-feature-title">DriveFlow</div>
+              <div class="auto-feature-desc">Detects when Android Auto connects and automatically resumes playback. No queue? It builds one — 50+ tracks drawn intelligently from your listening history, current album, and most-played tracks.</div>
+            </div>
+            <div class="auto-feature">
+              <div class="auto-feature-title">Night Drive</div>
+              <div class="auto-feature-desc">Between 8PM and 6AM, the player automatically shifts to a dimmed, softer visual mode when driving. Easier on the eyes. Reverts when you disconnect.</div>
+            </div>
+            <div class="auto-feature">
+              <div class="auto-feature-title">Full Library Browse</div>
+              <div class="auto-feature-desc">Albums, artists, playlists, recently played, and your full library — all browseable from the car screen. Albums and artists display as a grid. Tracks as a list. Tap anything to play.</div>
+            </div>
+            <div class="auto-feature">
+              <div class="auto-feature-title">Steering Wheel Controls</div>
+              <div class="auto-feature-desc">Physical media buttons on your steering wheel or head unit work natively — play, pause, skip, previous. No setup required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="auto-card-badge">
+          <div class="auto-badge-icon">🚗</div>
+          <div class="auto-badge-label">Android Auto</div>
+          <div class="auto-badge-sub">Compatible</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
