@@ -1018,8 +1018,8 @@
     }
     .pill-video-device {
       position: relative;
-      width: 260px;
-      height: 290px;
+      width: 320px;
+      height: 360px;
       border-radius: 28px;
       overflow: hidden;
       border: 1px solid rgba(0,229,255,0.35);
@@ -1042,22 +1042,6 @@
       background: linear-gradient(to top, #060810 0%, transparent 100%);
       pointer-events: none;
       border-radius: 0 0 28px 28px;
-    }
-    /* Scanline overlay for cyberpunk feel */
-    .pill-video-device::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.08) 2px,
-        rgba(0,0,0,0.08) 4px
-      );
-      pointer-events: none;
-      z-index: 2;
-      border-radius: 28px;
     }
     .pill-video-caption {
       font-family: 'Rajdhani', sans-serif;
