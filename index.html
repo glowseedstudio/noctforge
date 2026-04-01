@@ -1100,6 +1100,87 @@
       line-height: 1.6;
     }
 
+    /* ── UPCOMING ── */
+    .upcoming-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .upcoming-card {
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .upcoming-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(0,229,255,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .upcoming-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .upcoming-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+    .upcoming-icon {
+      font-size: 36px;
+      margin-bottom: 14px;
+    }
+    .upcoming-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .upcoming-card p {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .upcoming-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .upcoming-pill {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-dim);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dim);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border-dim);
@@ -1189,6 +1270,7 @@
     <li><a href="#music">Music</a></li>
     <li><a href="#games">Games</a></li>
     <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#upcoming">Coming Soon</a></li>
     <li><a href="#pricing" class="nav-cta">Get the app</a></li>
   </ul>
 </nav>
@@ -2342,6 +2424,45 @@
   </div>
 </section>
 
+<!-- UPCOMING -->
+<section class="section section-alt" id="upcoming">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Coming Soon</span>
+      <h2 class="section-title">What's being built next.</h2>
+      <p class="section-sub">New tools that follow the same principle — powerful, private, and fully offline. No internet. No accounts. No surprises.</p>
+    </div>
+    <div class="upcoming-grid">
+
+      <div class="glass-card upcoming-card reveal">
+        <div class="upcoming-badge"><span class="upcoming-badge-dot"></span>In Development</div>
+        <div class="upcoming-icon">💳</div>
+        <h3>Subscription Tracker</h3>
+        <p>Track every subscription you pay for — manually entered, fully offline. No bank scraping, no account linking, no internet required. Set renewal dates and NoctForge reminds you before they hit. A clear view of what you're actually spending, stored only on your device.</p>
+        <div class="upcoming-pills">
+          <span class="upcoming-pill">Manual entry</span>
+          <span class="upcoming-pill">Local reminders</span>
+          <span class="upcoming-pill">No internet</span>
+          <span class="upcoming-pill">No bank access</span>
+        </div>
+      </div>
+
+      <div class="glass-card upcoming-card reveal reveal-delay-1">
+        <div class="upcoming-badge"><span class="upcoming-badge-dot"></span>In Development</div>
+        <div class="upcoming-icon">⌚</div>
+        <h3>Wear OS Support</h3>
+        <p>NoctForge coming to your wrist. Music controls, quick tools, and core features accessible directly from your Wear OS watch — fully paired with the app on your phone.</p>
+        <div class="upcoming-pills">
+          <span class="upcoming-pill">Music controls</span>
+          <span class="upcoming-pill">Quick tools</span>
+          <span class="upcoming-pill">Wear OS</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <img src="logo.png" alt="NoctForge" style="width:48px; height:auto; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 10px rgba(0,229,255,0.4));" />
@@ -2351,6 +2472,7 @@
     <li><a href="#features">Features</a></li>
     <li><a href="#privacy">Privacy</a></li>
     <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#upcoming">Coming Soon</a></li>
     <li><a href="privacy.html">Privacy Policy</a></li>
     <li><a href="mailto:glowseedstudio@gmail.com">Contact</a></li>
   </ul>
