@@ -1008,6 +1008,66 @@
       opacity: 0.75;
     }
 
+    /* ── NOCTPILL VIDEO ── */
+    .pill-video-showcase {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .pill-video-device {
+      position: relative;
+      width: 260px;
+      height: 290px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(0,229,255,0.35);
+      animation: rgb-glow 5s linear infinite;
+      background: #000;
+    }
+    .pill-video-device video {
+      width: 100%;
+      height: auto;
+      display: block;
+      /* Push up to clip status bar at top of recording */
+      margin-top: -28px;
+    }
+    /* Bottom fade — softly dissolves the cut-off edge */
+    .pill-video-device::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, #060810 0%, transparent 100%);
+      pointer-events: none;
+      border-radius: 0 0 28px 28px;
+    }
+    /* Scanline overlay for cyberpunk feel */
+    .pill-video-device::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 2;
+      border-radius: 28px;
+    }
+    .pill-video-caption {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
     /* ── TOOL LIBRARY ── */
     .library-layout {
       display: grid;
@@ -1693,6 +1753,16 @@
         </div>
       </div>
     </div>
+
+    <div class="pill-video-showcase reveal">
+      <div class="pill-video-device">
+        <video autoplay loop muted playsinline>
+          <source src="noctforge-pill.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="pill-video-caption">NoctPill · Live on your screen</p>
+    </div>
+
   </div>
 </section>
 
