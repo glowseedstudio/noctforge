@@ -441,34 +441,6 @@
     .theme-pack-card:hover::before { opacity: 1; }
     .theme-pack-card { cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .theme-pack-card.active-pack { box-shadow: 0 0 0 2px var(--accent), 0 0 24px var(--accent-dim); transform: translateY(-3px); }
-    .theme-preview-area {
-      display: flex; justify-content: center;
-      margin-top: 32px; margin-bottom: 16px;
-    }
-    .theme-preview-frame {
-      position: relative;
-      max-width: 320px; width: 100%;
-      border-radius: 36px;
-      overflow: hidden;
-      box-shadow: 0 0 0 2px var(--accent), 0 0 40px var(--accent-dim), 0 24px 60px rgba(0,0,0,0.6);
-      transition: box-shadow 0.4s ease;
-    }
-    .theme-preview-frame img {
-      width: 100%; display: block;
-      transition: opacity 0.3s ease;
-    }
-    .theme-preview-label {
-      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text);
-      background: rgba(5,6,8,0.75);
-      backdrop-filter: blur(8px);
-      padding: 6px 14px; border-radius: 20px;
-      border: 1px solid var(--accent);
-      white-space: nowrap;
-    }
 
     .theme-pack-name {
       font-family: 'Orbitron', sans-serif;
@@ -1469,12 +1441,6 @@
       </div>
     </div>
 
-    <div class="theme-preview-area reveal">
-      <div class="theme-preview-frame">
-        <img id="theme-preview-img" src="screenshots/theme-neon.png" alt="Neon Theme" />
-        <div class="theme-preview-label" id="theme-preview-label">Neon Pack</div>
-      </div>
-    </div>
 
     <div class="section-header reveal" style="margin-top:48px; margin-bottom:24px;">
       <span class="section-eyebrow">Accent Colours</span>
@@ -2398,23 +2364,6 @@ document.querySelectorAll('.accent-swatch').forEach(s => {
   s.addEventListener('click', () => applyAccent(s.dataset.name));
 });
 
-// ── THEME PACK PREVIEW ──
-const themeLabels = { neon: 'Neon Pack', noir: 'Noir Pack', studio: 'Studio Pack' };
-document.querySelectorAll('.theme-pack-card').forEach(card => {
-  card.addEventListener('click', () => {
-    document.querySelectorAll('.theme-pack-card').forEach(c => c.classList.remove('active-pack'));
-    card.classList.add('active-pack');
-    const theme = card.dataset.theme;
-    const img = document.getElementById('theme-preview-img');
-    img.style.opacity = '0';
-    setTimeout(() => {
-      img.src = `screenshots/theme-${theme}.png`;
-      img.alt = themeLabels[theme];
-      document.getElementById('theme-preview-label').textContent = themeLabels[theme];
-      img.style.opacity = '1';
-    }, 200);
-  });
-});
 
 // ── FEATURE CATEGORY FILTER ──
 document.querySelectorAll('.cat-btn').forEach(btn => {
