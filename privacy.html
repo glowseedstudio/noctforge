@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — NoctForge</title>
+  <meta name="description" content="NoctForge Privacy Policy. No data collection, no tracking, no internet access. Your data stays on your device." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:     #00e5ff;
+      --accent-dim: rgba(0,229,255,0.18);
+      --bg:         #050608;
+      --bg2:        #080c14;
+      --surface:    rgba(10,20,40,0.72);
+      --border:     rgba(0,229,255,0.22);
+      --border-dim: rgba(255,255,255,0.08);
+      --text:       #f0f4ff;
+      --text-dim:   rgba(240,244,255,0.78);
+      --text-muted: rgba(240,244,255,0.58);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.04) 2px,
+        rgba(0,0,0,0.04) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      background: rgba(5,6,8,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800; font-size: 18px;
+      color: var(--text);
+    }
+    .nav-brand span { color: var(--accent); }
+    .nav-logo { width: 32px; height: auto; object-fit: contain; }
+    .nav-back {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      position: relative; z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    /* ── HEADER ── */
+    .policy-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .policy-eyebrow {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 5px 14px; border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .policy-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .policy-title span { color: var(--accent); }
+    .policy-meta {
+      font-size: 14px; font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    /* ── BADGES ── */
+    .policy-badges {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      margin-bottom: 0;
+    }
+    .badge {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 999px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .badge.green {
+      border-color: rgba(76,175,80,0.6);
+      color: #4caf50;
+      background: rgba(76,175,80,0.1);
+    }
+
+    /* ── SECTIONS ── */
+    .policy-section {
+      background: var(--surface);
+      border: 1px solid var(--border-dim);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(12px);
+    }
+    .policy-section:hover {
+      border-color: rgba(0,229,255,0.18);
+    }
+    .section-heading {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .section-body {
+      font-size: 15px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    /* ── PERMISSION BLOCK ── */
+    .perm-block {
+      background: rgba(0,229,255,0.04);
+      border: 1px solid rgba(0,229,255,0.14);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 10px 0;
+    }
+    .perm-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .perm-desc {
+      font-size: 14px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .perm-block.denied {
+      background: rgba(244,67,54,0.04);
+      border-color: rgba(244,67,54,0.2);
+    }
+    .perm-block.denied .perm-name {
+      color: #f44336;
+    }
+
+    /* ── NOT REQUESTED BOX ── */
+    .not-requested {
+      background: rgba(76,175,80,0.06);
+      border: 1px solid rgba(76,175,80,0.28);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-top: 14px;
+    }
+    .not-requested-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #4caf50;
+      margin-bottom: 10px;
+    }
+    .not-requested ul {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .not-requested ul li {
+      font-size: 14px; font-weight: 600;
+      color: var(--text-dim);
+    }
+    .not-requested ul li::before {
+      content: '✕ ';
+      color: #4caf50;
+      font-weight: 700;
+    }
+
+    /* ── FEATURE ROW ── */
+    .feature-row {
+      border-bottom: 1px solid var(--border-dim);
+      padding: 12px 0;
+    }
+    .feature-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .feature-row:first-child { padding-top: 0; }
+    .feature-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .feature-detail {
+      font-size: 14px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+
+    /* ── LAW PILLS ── */
+    .law-pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 14px;
+    }
+    .law-pill {
+      font-size: 12px; font-weight: 700;
+      padding: 4px 12px; border-radius: 999px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border-dim);
+    }
+    .footer-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800; font-size: 18px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-copy {
+      font-size: 13px; font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+    .footer-back {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 8px 20px; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .footer-back:hover { background: var(--accent-dim); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+      .page { padding: 40px 16px 60px; }
+      .policy-section { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="logo.png" alt="NoctForge" class="nav-logo" />
+    Noct<span>Forge</span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="page">
+
+  <div class="policy-header">
+    <div class="policy-eyebrow">Legal</div>
+    <h1 class="policy-title">Privacy <span>Policy</span></h1>
+    <p class="policy-meta">Glowseed Studio &nbsp;·&nbsp; Effective Date: 1 April 2026</p>
+    <div class="policy-badges">
+      <span class="badge">Offline-First</span>
+      <span class="badge green">No Tracking</span>
+      <span class="badge">No Accounts</span>
+      <span class="badge green">No Ads</span>
+      <span class="badge">On-Device Only</span>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <div class="policy-section">
+    <div class="section-heading">1. Scope, Operator, and Effective Date</div>
+    <div class="section-body">This Privacy Policy describes how Glowseed Studio ("Glowseed", "we", "us", or "our") handles information in connection with the NoctForge mobile application and all of its built-in tools, modules, widgets, and settings flows.
+
+This policy covers the full NoctForge app experience, including (but not limited to): music player, authenticator, notes, PDF tools, voice memos, QR scanner/generator, creator tools, sensor tools, games, utility tools, launcher and home views, and all settings surfaces.
+
+By installing or using NoctForge, you acknowledge this policy.</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="policy-section">
+    <div class="section-heading">2. Our Core Privacy Commitment</div>
+    <div class="section-body">NoctForge is built on a single principle: <strong style="color:var(--text)">your data stays on your device.</strong>
+
+We do not collect your personal information. We do not run analytics or tracking. We do not serve advertisements. We do not operate user accounts. We do not sell, share, or transmit data about you to any third party.
+
+The INTERNET permission is explicitly absent from the NoctForge Android manifest. The app is technically incapable of making any outbound network connection. This is not a policy choice that could change with a server-side update — it is enforced at the OS permission level.
+
+All processing described in this policy occurs locally on your device, under your direct control.</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="policy-section">
+    <div class="section-heading">3. What Data Is Processed and Where</div>
+    <div class="section-body">Depending on which tools you use, NoctForge processes the following data — all locally on your device:
+
+• <strong style="color:var(--text)">User content:</strong> notes, documents, images, audio recordings, music library metadata, QR payloads, tag edits, and any other content you create or import.
+• <strong style="color:var(--text)">App preferences and state:</strong> theme pack, accent colour, home layout, enabled tools, personalisation settings, and launcher configuration.
+• <strong style="color:var(--text)">Security state:</strong> local lock settings, biometric configuration flags, and secure storage keys. Raw biometric data is never received or stored by NoctForge — biometric operations use the platform's own secure hardware.
+• <strong style="color:var(--text)">Operational metadata:</strong> local timestamps, playback history, tool usage history, and internal state required to resume workflows.
+• <strong style="color:var(--text)">Sensor readings:</strong> real-time readings from hardware sensors (compass, barometer, accelerometer, light meter, etc.) for sensor tools. Not stored or transmitted.
+
+None of this data leaves your device unless you explicitly export or share it yourself.</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="policy-section">
+    <div class="section-heading">4. Permissions — What We Request and Why</div>
+    <div class="section-body" style="margin-bottom:14px;">NoctForge requests only the permissions required for specific features. You can deny or revoke any permission at any time in Android Settings → Apps → NoctForge → Permissions. Revoking a permission disables the relevant feature but does not affect other tools.</div>
+
+    <div class="perm-block">
+      <div class="perm-name">CAMERA</div>
+      <div class="perm-desc">Used by: Flashlight, QR Scanner, QR Generator (screen scanning), camera utility tools.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">RECORD_AUDIO</div>
+      <div class="perm-desc">Used by: Instrument Tuner (pitch detection from microphone), Voice Memos (recording).</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">MODIFY_AUDIO_SETTINGS</div>
+      <div class="perm-desc">Used by: Metronome and audio routing features to manage audio focus and output.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">READ_MEDIA_AUDIO</div>
+      <div class="perm-desc">Used by: Music Player to index and play audio files from folders you select.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">USE_BIOMETRIC / USE_FINGERPRINT</div>
+      <div class="perm-desc">Used by: Authenticator, NoctForge Notes, and tools with a biometric lock. Biometric authentication is handled entirely by the Android Keystore — NoctForge never receives your fingerprint or face data.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">ACCESS_FINE_LOCATION</div>
+      <div class="perm-desc">Used by: Compass and Heading HUD (for GPS-assisted bearing accuracy). Location is used in real-time only and is never stored, logged, or transmitted.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">BLUETOOTH_CONNECT</div>
+      <div class="perm-desc">Used by: Device Info tool to display the name of connected Bluetooth devices. No Bluetooth data is stored or transmitted.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">SYSTEM_ALERT_WINDOW (Draw Over Other Apps)</div>
+      <div class="perm-desc">Used by: NoctPill — the floating overlay feature. Only active when NoctPill is enabled.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">FOREGROUND_SERVICE / FOREGROUND_SERVICE_MEDIA_PLAYBACK</div>
+      <div class="perm-desc">Used by: Music Player to continue playback in the background with a persistent notification. Standard Android requirement for background audio.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">FOREGROUND_SERVICE_SPECIAL_USE</div>
+      <div class="perm-desc">Used by: NoctPill overlay service to remain active while you use other apps.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">WAKE_LOCK</div>
+      <div class="perm-desc">Used by: Bedside Clock (screen-on) and Music Player (prevent CPU sleep during playback).</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">RECEIVE_BOOT_COMPLETED</div>
+      <div class="perm-desc">Used by: Reminders and scheduled alarms. Re-registers alarms after a device restart so they continue to fire correctly.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">POST_NOTIFICATIONS</div>
+      <div class="perm-desc">Used by: Timers, Focus sessions, Reminders, and Music Player notifications.</div>
+    </div>
+    <div class="perm-block">
+      <div class="perm-name">SCHEDULE_EXACT_ALARM</div>
+      <div class="perm-desc">Used by: Timers and Reminders that require delivery at a precise time.</div>
+    </div>
+
+    <div class="not-requested">
+      <div class="not-requested-title">Permissions explicitly NOT requested</div>
+      <ul>
+        <li>INTERNET — the app cannot make any network connection.</li>
+        <li>AD_ID (Advertising Identifier) — no advertising or tracking of any kind.</li>
+        <li>READ_EXTERNAL_STORAGE / WRITE_EXTERNAL_STORAGE — not used on modern Android.</li>
+        <li>ACCESS_NETWORK_STATE / ACCESS_WIFI_STATE — not required; no network use.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="policy-section">
+    <div class="section-heading">5. Sensitive Features — How They Handle Your Data</div>
+
+    <div class="feature-row">
+      <div class="feature-name">Authenticator</div>
+      <div class="feature-detail">TOTP secret keys are stored in encrypted local storage using the Android Keystore. Codes are generated on-device. Nothing is transmitted. Biometric lock gates access to secrets.</div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-name">NoctForge Notes</div>
+      <div class="feature-detail">Notes are encrypted at rest using XChaCha20-Poly1305 (AEAD) encryption. The encryption key is hardware-backed via the Android Keystore. Data never leaves your device.</div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-name">NoctForge PDF</div>
+      <div class="feature-detail">PDF processing, OCR, digital signing, and document manipulation all occur on-device. No document content is transmitted.</div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-name">Voice Memos</div>
+      <div class="feature-detail">Recordings are saved to app-private local storage. They are not uploaded, indexed, or transmitted anywhere.</div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-name">Music Player</div>
+      <div class="feature-detail">Your music library is indexed from folders you select. Metadata is read locally. Listening history for YearForge is stored locally only and is never shared.</div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-name">QR Tools</div>
+      <div class="feature-detail">QR codes are scanned and decoded on-device. Scan history is stored locally. Nothing is transmitted.</div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-name">Sensor Tools</div>
+      <div class="feature-detail">All sensor readings (compass, barometer, accelerometer, proximity, light meter, spirit level) are consumed in real-time and are not stored or logged.</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="policy-section">
+    <div class="section-heading">6. Data You Choose to Export or Share</div>
+    <div class="section-body">NoctForge only passes data to another app or destination when you explicitly trigger a share, export, or open action (for example: sharing a QR code, exporting a PDF, or saving a voice memo to a folder).
+
+Once you export content, handling of that content is governed by the destination app or service you chose. Glowseed does not control what happens to data after you choose to share it.</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="policy-section">
+    <div class="section-heading">7. Data Storage, Retention, and Deletion</div>
+    <div class="section-body">All app data is stored on your device in app-private storage or in locations you have explicitly chosen (such as a folder you selected for music or exports).
+
+Data remains on your device until you delete it within the app, clear app data via Android Settings, or uninstall NoctForge. Uninstalling removes all data stored in app-private directories. Files you exported to shared locations (such as Downloads) are not affected.
+
+Because we have no servers, we cannot delete data on your behalf — you hold full control.</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="policy-section">
+    <div class="section-heading">8. Backups and Device Transfers</div>
+    <div class="section-body">If you use Android's built-in backup system (Google One Backup), app data may be included in that backup per your Android and Google account settings. That backup is governed by Google's Privacy Policy, not ours.
+
+If you manually export data from NoctForge, the security of those exports is your responsibility. We recommend protecting sensitive exports with a strong password or encrypted storage.
+
+For security-critical data (authenticator secrets, encrypted notes), verify the integrity of any backup before relying on it for recovery.</div>
+  </div>
+
+  <!-- 9 -->
+  <div class="policy-section">
+    <div class="section-heading">9. Google Play Store and Platform Data Collection</div>
+    <div class="section-body">NoctForge is distributed through the Google Play Store. Google independently collects certain data related to app installation, updates, and crash diagnostics under its own Privacy Policy and Google Play terms. This is outside our control and governed entirely by Google.
+
+NoctForge does not use Firebase, Google Analytics, Crashlytics, AdMob, or any other Google SDK that would give us access to usage or crash data about you. We receive no telemetry from the app.
+
+For information on what Google Play collects, refer to Google's Privacy Policy at policies.google.com/privacy.</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="policy-section">
+    <div class="section-heading">10. Security Controls and Limitations</div>
+    <div class="section-body">NoctForge uses platform-recommended security patterns including:
+• Android Keystore for cryptographic key storage (hardware-backed on supported devices).
+• XChaCha20-Poly1305 encryption for sensitive content at rest.
+• FLAG_SECURE to block screenshots on sensitive screens where enabled.
+• Biometric gating for access to sensitive tools.
+
+No security measure is absolute. Your overall security also depends on your device's lock screen strength, whether your device is rooted or compromised, and whether your Android OS and security patches are up to date. Keep your device updated and use a strong screen lock.</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="policy-section">
+    <div class="section-heading">11. No Analytics, No Ads, No Tracking</div>
+    <div class="section-body">NoctForge contains no analytics SDKs, no advertising SDKs, no crash reporting services, and no behavioural tracking of any kind. We do not know how you use the app, which tools you open, how long you use it, or anything else about your usage.
+
+This is not a configuration option — there is no analytics infrastructure in the app at all. We cannot receive telemetry even if we wanted to, because the INTERNET permission is not present in the app manifest.</div>
+  </div>
+
+  <!-- 12 -->
+  <div class="policy-section">
+    <div class="section-heading">12. Children's Privacy</div>
+    <div class="section-body">NoctForge does not knowingly collect personal information from anyone, including children. Because the app collects no data and has no internet connectivity, it does not present the data collection risks that COPPA (US), GDPR-K (EU), or equivalent regulations are designed to address.
+
+NoctForge is not specifically directed at children under 13. If you are a parent or guardian with concerns about your child's use of a specific tool within NoctForge, contact us and we will respond promptly.</div>
+  </div>
+
+  <!-- 13 -->
+  <div class="policy-section">
+    <div class="section-heading">13. Your Rights Under Applicable Law</div>
+    <div class="law-pills">
+      <span class="law-pill">Australian Privacy Act 1988</span>
+      <span class="law-pill">GDPR (EU/UK)</span>
+      <span class="law-pill">CCPA (California)</span>
+    </div>
+    <div class="section-body">Depending on your jurisdiction, you may have rights including access, correction, deletion, portability, and the right to object to processing.
+
+Because NoctForge does not collect, store, or process your personal information on any server, most of these rights can be exercised directly and immediately by you — by deleting content, revoking permissions, clearing app data, or uninstalling the app.
+
+We hold no personal data about you on any server. If you have a specific rights request or concern, contact us at glowseedstudio@gmail.com and we will respond within a reasonable timeframe.</div>
+  </div>
+
+  <!-- 14 -->
+  <div class="policy-section">
+    <div class="section-heading">14. Policy Updates</div>
+    <div class="section-body">We may update this Privacy Policy to reflect changes to the app, new features, legal requirements, or clarifications. Updated versions will be published with a revised effective date via app updates.
+
+Because we have no way to contact you directly (no accounts, no email collection), we encourage you to review this policy periodically. Material changes will be noted in the Play Store release notes.</div>
+  </div>
+
+  <!-- 15 -->
+  <div class="policy-section">
+    <div class="section-heading">15. Contact</div>
+    <div class="section-body"><strong style="color:var(--text)">Glowseed Studio</strong>
+Email: <a href="mailto:glowseedstudio@gmail.com" style="color:var(--accent); text-decoration:none;">glowseedstudio@gmail.com</a>
+
+If you have a privacy question or concern, please include your app version (found in Settings), your Android version, and the specific tool or feature your question relates to. We aim to respond within 5 business days.</div>
+  </div>
+
+</div>
+
+<footer>
+  <img src="logo.png" alt="NoctForge" style="width:40px; height:auto; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 8px rgba(0,229,255,0.4));" />
+  <div class="footer-brand">Noct<span>Forge</span></div>
+  <div class="footer-copy">© 2026 Glowseed Studio · NoctForge · All rights reserved</div>
+  <a href="index.html" class="footer-back">← Back to NoctForge</a>
+</footer>
+
+</body>
+</html>
