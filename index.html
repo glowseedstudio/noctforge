@@ -1050,6 +1050,121 @@
       color: var(--text-muted);
     }
 
+    /* ── NOCTPILL QUICK TILE ── */
+    .pill-quick-panel {
+      margin-top: 56px;
+    }
+    .pill-quick-card {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+      padding: 44px 48px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.07) 0%, rgba(124,77,255,0.07) 100%);
+      border: 1px solid rgba(0,229,255,0.28);
+      border-radius: 28px;
+      box-shadow: 0 0 60px rgba(0,229,255,0.07), 0 12px 40px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .pill-quick-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px; right: -1px; bottom: -1px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.18), transparent 50%, rgba(124,77,255,0.12));
+      pointer-events: none;
+      z-index: 0;
+    }
+    .pill-quick-text { position: relative; z-index: 1; }
+    .pill-quick-eyebrow {
+      display: inline-block;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.3);
+      border-radius: 999px;
+      padding: 3px 12px;
+      margin-bottom: 16px;
+    }
+    .pill-quick-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+    .pill-quick-title span { color: var(--accent); }
+    .pill-quick-sub {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+    .pill-quick-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0,229,255,0.75);
+    }
+    .pill-quick-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(0,229,255,0.8);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+    .pill-quick-img-wrap {
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+    .pill-quick-img-wrap img {
+      display: block;
+      width: 220px;
+      border-radius: 18px;
+      border: 1px solid rgba(0,229,255,0.35);
+      box-shadow:
+        0 0 0 1px rgba(0,229,255,0.1),
+        0 0 30px rgba(0,229,255,0.18),
+        0 16px 48px rgba(0,0,0,0.55);
+      animation: quick-float 4s ease-in-out infinite;
+    }
+    @keyframes quick-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    @media (max-width: 680px) {
+      .pill-quick-card {
+        grid-template-columns: 1fr;
+        padding: 32px 24px;
+        gap: 32px;
+        text-align: center;
+      }
+      .pill-quick-img-wrap { margin: 0 auto; }
+      .pill-quick-img-wrap img { width: 180px; }
+      .pill-quick-badge { justify-content: center; }
+    }
+
     /* ── TOOL LIBRARY ── */
     .library-layout {
       display: grid;
@@ -1748,6 +1863,23 @@
         </video>
       </div>
       <p class="pill-video-caption">NoctPill · Live on your screen</p>
+    </div>
+
+    <div class="pill-quick-panel reveal">
+      <div class="pill-quick-card">
+        <div class="pill-quick-text">
+          <span class="pill-quick-eyebrow">Quick Settings Tile</span>
+          <h3 class="pill-quick-title">One swipe.<br><span>Always within reach.</span></h3>
+          <p class="pill-quick-sub">NoctPill lives in your Android Quick Settings panel. Pull down the notification shade and toggle it on or off instantly — no need to open the app, no hunting through menus.</p>
+          <div class="pill-quick-badge">
+            <div class="pill-quick-badge-dot"></div>
+            Available in Android Quick Settings
+          </div>
+        </div>
+        <div class="pill-quick-img-wrap">
+          <img src="screenshots/noctpill-quick.png" alt="NoctPill Android Quick Settings tile" />
+        </div>
+      </div>
     </div>
 
   </div>
