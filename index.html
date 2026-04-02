@@ -752,13 +752,59 @@
     }
     .auto-card-inner {
       display: grid;
-      grid-template-columns: 1fr 160px;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
       align-items: center;
     }
     @media (max-width: 700px) {
       .auto-card-inner { grid-template-columns: 1fr; }
       .auto-card { padding: 24px 20px; }
+    }
+    .auto-screen-wrap {
+      position: relative;
+    }
+    .auto-screen-frame {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid rgba(0,229,255,0.35);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.6),
+        0 0 32px rgba(0,229,255,0.18),
+        0 16px 48px rgba(0,0,0,0.7);
+      background: #000;
+      aspect-ratio: 16/9;
+    }
+    .auto-screen-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .auto-screen-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      justify-content: center;
+    }
+    .auto-screen-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .auto-screen-label-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
     }
     .auto-features {
       display: grid;
@@ -2635,10 +2681,14 @@
             </div>
           </div>
         </div>
-        <div class="auto-card-badge">
-          <div class="auto-badge-icon">🚗</div>
-          <div class="auto-badge-label">Android Auto</div>
-          <div class="auto-badge-sub">Compatible</div>
+        <div class="auto-screen-wrap">
+          <div class="auto-screen-frame">
+            <img src="screenshots/auto-1.png" alt="NoctForge on Android Auto" onerror="this.style.display='none'" />
+          </div>
+          <div class="auto-screen-label">
+            <div class="auto-screen-dot"></div>
+            <div class="auto-screen-label-text">Live on Android Auto</div>
+          </div>
         </div>
       </div>
     </div>
