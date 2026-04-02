@@ -600,6 +600,146 @@
       line-height: 1.65;
     }
 
+    /* ── MUSIC SHOWCASE ── */
+    .music-showcase {
+      margin-top: 56px;
+      padding: 52px 48px;
+      background: linear-gradient(160deg, rgba(0,229,255,0.06) 0%, rgba(168,85,247,0.07) 50%, rgba(52,211,153,0.05) 100%);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 32px;
+      box-shadow: 0 0 80px rgba(0,229,255,0.06), 0 16px 48px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .music-showcase::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(0,229,255,0.5) 40%, rgba(168,85,247,0.4) 70%, transparent 100%);
+    }
+    .music-showcase-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+    .music-showcase-eyebrow {
+      display: inline-block;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .music-showcase-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .music-showcase-title span { color: var(--accent); }
+    .music-showcase-sub {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    /* 3-phone row */
+    .music-phones {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: flex-end;
+      margin-bottom: 40px;
+    }
+    .music-phone-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      max-width: 200px;
+    }
+    .music-phone-slot:nth-child(2) .music-phone-frame {
+      transform: translateY(-14px);
+      border-color: rgba(168,85,247,0.5);
+      box-shadow: 0 0 30px rgba(168,85,247,0.2), 0 12px 36px rgba(0,0,0,0.55);
+    }
+    .music-phone-frame {
+      width: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(0,229,255,0.32);
+      box-shadow: 0 0 24px rgba(0,229,255,0.12), 0 10px 30px rgba(0,0,0,0.5);
+      background: #080d18;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .music-phone-frame:hover {
+      transform: translateY(-8px) scale(1.03) !important;
+      box-shadow: 0 0 40px rgba(0,229,255,0.25), 0 20px 44px rgba(0,0,0,0.6) !important;
+    }
+    .music-phone-slot:nth-child(2) .music-phone-frame:hover {
+      transform: translateY(-22px) scale(1.03) !important;
+    }
+    .music-phone-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .music-phone-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    /* Visualiser video */
+    .music-viz-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .music-viz-device {
+      position: relative;
+      width: 300px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(52,211,153,0.45);
+      box-shadow: 0 0 40px rgba(52,211,153,0.18), 0 0 80px rgba(0,229,255,0.08), 0 16px 48px rgba(0,0,0,0.6);
+      background: #000;
+      animation: viz-pulse 4s ease-in-out infinite;
+    }
+    @keyframes viz-pulse {
+      0%, 100% { box-shadow: 0 0 40px rgba(52,211,153,0.18), 0 0 80px rgba(0,229,255,0.08), 0 16px 48px rgba(0,0,0,0.6); }
+      50% { box-shadow: 0 0 60px rgba(52,211,153,0.3), 0 0 100px rgba(0,229,255,0.12), 0 16px 48px rgba(0,0,0,0.6); }
+    }
+    .music-viz-device video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .music-viz-caption {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(52,211,153,0.7);
+    }
+    @media (max-width: 640px) {
+      .music-showcase { padding: 36px 20px; }
+      .music-phones { gap: 10px; }
+      .music-phone-slot { max-width: 110px; }
+      .music-phone-slot:nth-child(2) .music-phone-frame { transform: translateY(-8px); }
+      .music-phone-slot:nth-child(2) .music-phone-frame:hover { transform: translateY(-16px) scale(1.03) !important; }
+      .music-viz-device { width: 220px; }
+    }
+
     /* ── ANDROID AUTO ── */
     .auto-card {
       padding: 36px 40px;
@@ -2423,6 +2563,45 @@
         <div class="music-card-accent" style="background:#fb923c; box-shadow: 0 0 10px #fb923c;"></div>
         <h3>Visualiser</h3>
         <p>Seven live audio-reactive modes — spectrum bars, oscilloscope, peak/VU meter, dot matrix, radial spectrum, particle burst, and ribbon waves. Driven by the music player. Fullscreen and overlay modes. Colour follows your accent theme automatically.</p>
+      </div>
+    </div>
+
+    <!-- MUSIC SHOWCASE -->
+    <div class="music-showcase reveal">
+      <div class="music-showcase-header">
+        <div class="music-showcase-eyebrow">In Action</div>
+        <h3 class="music-showcase-title">Every screen built for <span>your music</span></h3>
+        <p class="music-showcase-sub">From the player to the lyrics editor — every part of the music suite is designed to feel premium and stay completely offline.</p>
+      </div>
+
+      <div class="music-phones">
+        <div class="music-phone-slot">
+          <div class="music-phone-frame">
+            <img src="screenshots/music-now-playing.png" alt="Now Playing" />
+          </div>
+          <div class="music-phone-label">Now Playing</div>
+        </div>
+        <div class="music-phone-slot">
+          <div class="music-phone-frame">
+            <img src="screenshots/music-tag-studio.png" alt="Tag Studio" />
+          </div>
+          <div class="music-phone-label">Tag Studio</div>
+        </div>
+        <div class="music-phone-slot">
+          <div class="music-phone-frame">
+            <img src="screenshots/lyrics-studio.png" alt="Lyrics Studio" />
+          </div>
+          <div class="music-phone-label">Lyrics Studio</div>
+        </div>
+      </div>
+
+      <div class="music-viz-wrap">
+        <div class="music-viz-device">
+          <video autoplay loop muted playsinline>
+            <source src="screenshots/visualiser.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="music-viz-caption">Visualiser · Live audio reactive</div>
       </div>
     </div>
 
