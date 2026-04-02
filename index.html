@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NoctForge — Offline tools. No tracking. Pure power.</title>
-  <meta name="description" content="42 tools, 9 games, and a complete music suite. Premium Android app. $6.99 AUD. One-time. No subscriptions." />
+  <meta name="description" content="Focus without distraction. Control your time. NoctForge is an offline-first Android utility suite — 42 tools, no subscriptions, no tracking, one honest price." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -338,10 +338,11 @@
     }
     .section-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(26px, 4vw, 42px);
+      font-size: clamp(30px, 4.5vw, 52px);
       font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 14px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
     }
     .section-sub {
       font-size: 17px;
@@ -366,7 +367,7 @@
     }
 
     /* ── SECTION SPACING ── */
-    .section { padding: 100px 0; }
+    .section { padding: 128px 0; }
     .section-alt { background: linear-gradient(180deg, transparent, rgba(0,229,255,0.02) 50%, transparent); }
 
     /* ── WHY NOCTFORGE ── */
@@ -1601,6 +1602,119 @@
       color: var(--text-dim);
     }
 
+    /* ── MANIFESTO ── */
+    .manifesto-section {
+      padding: 140px 0;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+    .manifesto-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .manifesto-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .manifesto-eyebrow {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+      display: block;
+      opacity: 0.8;
+    }
+    .manifesto-line {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(28px, 5vw, 58px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 0;
+    }
+    .manifesto-line.dim {
+      color: rgba(240,244,255,0.28);
+    }
+    .manifesto-line.accent {
+      background: linear-gradient(135deg, #00e5ff 0%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .manifesto-spacer { height: 20px; }
+    .manifesto-body {
+      margin-top: 56px;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .manifesto-rule {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+      margin: 48px auto;
+      opacity: 0.5;
+    }
+
+    /* ── INDIE TRUST BLOCK ── */
+    .trust-block {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      background: rgba(10,20,40,0.6);
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+    }
+    @media (max-width: 600px) {
+      .trust-block { flex-direction: column; text-align: center; padding: 28px 24px; }
+    }
+    .trust-logo {
+      width: 64px; height: 64px;
+      flex-shrink: 0;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(0,229,255,0.35));
+    }
+    .trust-text-headline {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .trust-text-body {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+    .trust-text-body strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border-dim);
@@ -1648,17 +1762,17 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transform: translateY(36px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
 
     /* ── NEON LINE DIVIDER ── */
     .neon-divider {
@@ -1706,11 +1820,9 @@
     <h1 class="hero-title">
       <span class="glow-text">NoctForge</span>
     </h1>
-    <p class="hero-tagline">Offline tools. No tracking. Pure power.</p>
+    <p class="hero-tagline">Focus. Control. No noise. No tracking.</p>
     <p class="hero-desc">
-      42 tools, 9 games, and a complete music suite — wrapped in a cyberpunk glassmorphism design
-      that makes every interaction feel like operating a piece of future technology.
-      No subscriptions. No cloud accounts. No internet required.
+      Your phone should work for you — not harvest you. NoctForge is an offline-first system of 42 premium tools built for people who are done paying monthly for things they own, done being the product, and done tolerating ugly software.
     </p>
     <div class="hero-actions">
       <span class="btn-primary" style="cursor:default; opacity:0.72; pointer-events:none;">
@@ -1743,13 +1855,42 @@
   </div>
 </section>
 
+<!-- MANIFESTO -->
+<section class="manifesto-section">
+  <div class="manifesto-inner">
+    <span class="manifesto-eyebrow reveal">The Philosophy</span>
+    <div class="reveal reveal-delay-1">
+      <p class="manifesto-line">Your focus</p>
+      <p class="manifesto-line accent">shouldn't be monetised.</p>
+    </div>
+    <div class="manifesto-spacer"></div>
+    <div class="reveal reveal-delay-2">
+      <p class="manifesto-line dim">No subscriptions for basic tools.</p>
+      <p class="manifesto-line dim">No data harvesting.</p>
+      <p class="manifesto-line dim">No ads. No cloud. No tracking.</p>
+    </div>
+    <div class="manifesto-rule reveal reveal-delay-3"></div>
+    <p class="manifesto-body reveal reveal-delay-3">We built NoctForge because we were sick of it — the 47 apps you need just to get through a day, half of them demanding a subscription, the other half quietly phoning home. NoctForge is one app. One honest price. Offline, always. Private, by design.</p>
+
+    <div style="margin-top: 56px;" class="reveal reveal-delay-4">
+      <div class="trust-block">
+        <img src="logo.png" alt="Glowseed Studio" class="trust-logo" />
+        <div>
+          <div class="trust-text-headline">Hand-crafted by Glowseed Studio</div>
+          <p class="trust-text-body">Solo-built in Australia for privacy-first users everywhere. <strong>No internet permission.</strong> Zero trackers. Zero third-party analytics. What happens on your device stays on your device — because that's how software should work.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SCREENSHOTS -->
 <section class="ss-section" id="screenshots">
   <div class="container">
     <div class="section-header reveal">
       <span class="section-eyebrow">Screenshots</span>
-      <h2 class="section-title">See it in action.</h2>
-      <p class="section-sub">Every screen crafted. Every interaction considered.</p>
+      <h2 class="section-title">Every screen. Considered.</h2>
+      <p class="section-sub">No corners cut. No filler screens. Every surface in NoctForge is crafted to feel like premium software — because it is.</p>
     </div>
 
     <div class="ss-tabs reveal">
@@ -1958,24 +2099,24 @@
   <div class="container">
     <div class="section-header reveal">
       <span class="section-eyebrow">Why NoctForge</span>
-      <h2 class="section-title">Built differently. On purpose.</h2>
-      <p class="section-sub">Most utility apps are ugly. Most are ad-supported. Most send your data somewhere. NoctForge does none of those things.</p>
+      <h2 class="section-title">You deserve better tools.</h2>
+      <p class="section-sub">Every other utility app is either ugly, ad-riddled, or quietly selling your data. NoctForge was built as the alternative — privacy-first, design-obsessed, and owned outright.</p>
     </div>
     <div class="why-grid">
       <div class="glass-card why-card reveal reveal-delay-1">
         <div class="why-icon">🔒</div>
-        <h3>Privacy is the foundation, not a feature</h3>
-        <p>Every sensitive tool uses XChaCha20-Poly1305 encryption at rest. Secrets are kept in the Android Keystore with hardware backing. Screenshots are blocked on every sensitive screen. Your data does not travel. Period.</p>
+        <h3>Your data never leaves your device</h3>
+        <p>Every sensitive tool uses XChaCha20-Poly1305 encryption at rest. Secrets live in the Android Keystore with hardware backing. Screenshots blocked on sensitive screens. No internet permission. Period.</p>
       </div>
       <div class="glass-card why-card reveal reveal-delay-2">
         <div class="why-icon">✦</div>
-        <h3>The design is a genuine differentiator</h3>
-        <p>Three theme packs. Six neon accent colours. Eight background gradient presets. CRT scanline overlays. Glow borders with halos. Frosted glass everywhere. NoctForge is the only utility app that looks like someone actually cared.</p>
+        <h3>The only utility app that looks this good</h3>
+        <p>Three theme packs. Six neon accents. Eight gradient presets. CRT overlays, glow borders, frosted glass. This is what happens when a designer gets sick of ugly software and decides to fix it themselves.</p>
       </div>
       <div class="glass-card why-card reveal reveal-delay-3">
         <div class="why-icon">⚡</div>
-        <h3>The depth is real</h3>
-        <p>Every tool goes further than competitors. The flashlight has a Morse code transmitter. The PDF suite has cryptographic digital signing and on-device OCR. The music player has an end-of-year listening recap. Forty-two tools. Each one complete.</p>
+        <h3>Goes deeper than any competitor</h3>
+        <p>The flashlight has Morse code. The PDF suite has cryptographic signing and on-device OCR. The music player has a full annual listening recap. Every tool does more than you expect — because half-built isn't good enough.</p>
       </div>
     </div>
   </div>
@@ -2261,8 +2402,8 @@
   <div class="container">
     <div class="section-header reveal">
       <span class="section-eyebrow">The Tools</span>
-      <h2 class="section-title">42 tools. Every one complete.</h2>
-      <p class="section-sub">One app that replaces a drawer full of separate downloads. Every tool goes deeper than you expect.</p>
+      <h2 class="section-title">One app. Replace the drawer.</h2>
+      <p class="section-sub">Forty-two tools that go further than the dedicated apps they replace — all offline, all in one purchase, all looking like they were built by someone who gives a damn.</p>
     </div>
 
     <div class="features-categories reveal">
@@ -2758,9 +2899,9 @@
 <section class="section section-alt" id="privacy">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-eyebrow">Privacy & Security</span>
-      <h2 class="section-title">Encrypted. Hardware-backed. Offline.</h2>
-      <p class="section-sub">No INTERNET permission in the manifest. No analytics SDK. No crash reporting phoning home. No account required for anything.</p>
+      <span class="section-eyebrow">Privacy</span>
+      <h2 class="section-title">No internet. No excuses.</h2>
+      <p class="section-sub">NoctForge holds no internet permission. There is no server to breach, no account to compromise, no telemetry draining your battery. Just software that works and stays quiet.</p>
     </div>
     <div class="privacy-grid">
       <div class="glass-card privacy-card reveal">
@@ -2991,6 +3132,7 @@
         Coming Soon to Google Play
       </span>
       <p class="pricing-note">Launching on Android via Google Play — stay tuned.</p>
+      <p class="pricing-note" style="margin-top:10px; color: rgba(240,244,255,0.38);">Built by one person who got fed up. Priced accordingly.</p>
     </div>
   </div>
 </section>
