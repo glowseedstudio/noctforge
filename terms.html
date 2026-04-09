@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use — NoctForge</title>
+  <meta name="description" content="NoctForge Terms of Use (EULA). One-time purchase, offline-first, proprietary software by Glowseed Studio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:     #00e5ff;
+      --accent-dim: rgba(0,229,255,0.18);
+      --bg:         #050608;
+      --bg2:        #080c14;
+      --surface:    rgba(10,20,40,0.72);
+      --border:     rgba(0,229,255,0.22);
+      --border-dim: rgba(255,255,255,0.08);
+      --text:       #f0f4ff;
+      --text-dim:   rgba(240,244,255,0.78);
+      --text-muted: rgba(240,244,255,0.58);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.04) 2px,
+        rgba(0,0,0,0.04) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      background: rgba(5,6,8,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800; font-size: 18px;
+      color: var(--text);
+    }
+    .nav-brand span { color: var(--accent); }
+    .nav-logo { width: 32px; height: auto; object-fit: contain; }
+    .nav-back {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      position: relative; z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    /* ── HEADER ── */
+    .policy-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .policy-eyebrow {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 5px 14px; border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .policy-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .policy-title span { color: var(--accent); }
+    .policy-meta {
+      font-size: 14px; font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    /* ── BADGES ── */
+    .policy-badges {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    }
+    .badge {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 999px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .badge.amber {
+      border-color: rgba(255,193,7,0.5);
+      color: #ffc107;
+      background: rgba(255,193,7,0.08);
+    }
+
+    /* ── SECTIONS ── */
+    .policy-section {
+      background: var(--surface);
+      border: 1px solid var(--border-dim);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(12px);
+    }
+    .policy-section:hover {
+      border-color: rgba(0,229,255,0.18);
+    }
+    .section-heading {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .section-body {
+      font-size: 15px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: rgba(0,229,255,0.05);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 14px; font-weight: 600;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .highlight-box strong { color: var(--accent); }
+
+    /* ── WARNING BOX ── */
+    .warning-box {
+      background: rgba(255,193,7,0.05);
+      border: 1px solid rgba(255,193,7,0.25);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 14px; font-weight: 600;
+      color: var(--text-dim);
+      line-height: 1.6;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── RESTRICTION LIST ── */
+    .restriction-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+      margin-top: 4px;
+    }
+    .restriction-list li {
+      font-size: 15px; font-weight: 500;
+      color: var(--text-dim);
+      line-height: 1.55;
+      padding-left: 18px;
+      position: relative;
+    }
+    .restriction-list li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border-dim);
+    }
+    .footer-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800; font-size: 18px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-copy {
+      font-size: 13px; font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+    .footer-back {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 8px 20px; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .footer-back:hover { background: var(--accent-dim); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+      .page { padding: 40px 16px 60px; }
+      .policy-section { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="logo.png" alt="NoctForge" class="nav-logo" />
+    Noct<span>Forge</span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="page">
+
+  <div class="policy-header">
+    <div class="policy-eyebrow">Legal</div>
+    <h1 class="policy-title">Terms of <span>Use</span></h1>
+    <p class="policy-meta">Glowseed Studio &nbsp;·&nbsp; Last Updated: 9 April 2026</p>
+    <div class="policy-badges">
+      <span class="badge">One-Time Purchase</span>
+      <span class="badge">Offline-First</span>
+      <span class="badge amber">Proprietary Software</span>
+      <span class="badge">No Subscription</span>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <div class="policy-section">
+    <div class="section-heading">1. Acceptance of Terms</div>
+    <div class="section-body">By downloading, installing, or using NoctForge ("the App"), you agree to be bound by these Terms of Use ("Terms") and the NoctForge Privacy Policy. If you do not agree to these Terms, do not install or use the App.
+
+This agreement constitutes a legally binding End User Licence Agreement (EULA) between you ("User") and Shaun Ashcroft, trading as Glowseed Studio ("Glowseed Studio", "we", "us", or "our").
+
+These Terms cover the full NoctForge application and all bundled tools, including NoctForge Notes, StitchPDF, NoctForge Authenticator, and every other feature included in the App.</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="policy-section">
+    <div class="section-heading">2. Licence Grant</div>
+    <div class="section-body">Glowseed Studio grants you a revocable, non-exclusive, non-transferable, limited licence to download, install, and use the App solely for your personal, non-commercial purposes, in accordance with these Terms.
+
+This licence does not include the right to sublicence, resell, redistribute, or make the App available to any third party in any form.</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="policy-section">
+    <div class="section-heading">3. Proprietary Software</div>
+    <div class="section-body">NoctForge is closed-source, proprietary software. The source code is not publicly available, and no part of this licence grants you any rights to the source code, underlying algorithms, or internal architecture of the App.
+
+We are upfront about this. What we can tell you: the INTERNET permission is absent from the Android manifest (provably offline), all permissions are documented in our Privacy Policy, and every privacy claim is verifiable by behaviour — not just our word.</div>
+    <div class="highlight-box"><strong>No internet permission.</strong> The app is technically incapable of transmitting data over any network connection. This is enforced at the OS level, not just by policy.</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="policy-section">
+    <div class="section-heading">4. One-Time Purchase</div>
+    <div class="section-body">Access to the full NoctForge feature set is granted upon a single, one-time payment. There are no subscription fees, recurring charges, or in-app purchases required for any feature included at the time of your purchase.
+
+The price is listed in Australian Dollars (AUD). Google Play automatically converts to your local currency at checkout — you will see your local price before confirming payment.
+
+Future major versions of the App may be released as separate paid upgrades at Glowseed Studio's sole discretion. Updates within the current version are included at no additional charge.</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="policy-section">
+    <div class="section-heading">5. The Offline Promise</div>
+    <div class="section-body">NoctForge is built to function entirely without an internet connection. Our commitments to you:
+
+• <strong style="color:var(--text)">No data collection.</strong> We do not collect analytics, telemetry, crash reports, or personal data of any kind.
+• <strong style="color:var(--text)">Local storage only.</strong> All content you create or process — notes, documents, audio, authenticator secrets, music — remains on your device unless you explicitly choose to export or share it.
+• <strong style="color:var(--text)">No watermarks.</strong> We do not alter your documents or exports with branding.
+• <strong style="color:var(--text)">No accounts required.</strong> NoctForge has no user account system. Nothing is tied to a login or cloud identity.</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="policy-section">
+    <div class="section-heading">6. On-Device Processing and Third-Party Components</div>
+    <div class="section-body">NoctForge uses the following third-party libraries for fully local, on-device processing. Neither component requires Google Play Services. Neither has network access.</div>
+    <div class="highlight-box"><strong>On-Device Text Recognition (OCR)</strong><br>PDF OCR uses a standalone text recognition model bundled inside the app. The model runs entirely on your device. No data is sent to any server. Google Play Services is not required for this feature to function.</div>
+    <div class="highlight-box" style="margin-top:10px;"><strong>Document Scanning (OpenCV)</strong><br>Document edge detection and scanning uses OpenCV via cunning_document_scanner — fully bundled, no network access, no Google Play Services dependency. Scanned images are processed locally and never transmitted.</div>
+    <div class="section-body" style="margin-top:14px;">By using the App, you acknowledge the use of these components for local processing only. Glowseed Studio makes no warranty regarding the continued availability or performance of these third-party libraries.</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="policy-section">
+    <div class="section-heading">7. Intellectual Property Rights</div>
+    <div class="section-body">• <strong style="color:var(--text)">Our property:</strong> The App — including its code, design, interface, branding, and all bundled tools — is the intellectual property of Glowseed Studio. All rights not expressly granted in these Terms are reserved.
+
+• <strong style="color:var(--text)">Your content:</strong> You retain full ownership of any documents, notes, images, audio recordings, or other files you create or process using the App. Glowseed Studio claims no intellectual property rights over your content.</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="policy-section">
+    <div class="section-heading">8. User Restrictions</div>
+    <div class="section-body" style="margin-bottom:12px;">You agree not to, and will not permit others to:</div>
+    <ul class="restriction-list">
+      <li>Reverse engineer, decompile, decode, decrypt, disassemble, or attempt to derive the source code of the App or any component thereof.</li>
+      <li>Modify, adapt, translate, or create derivative works based on the App.</li>
+      <li>Use the App for any unlawful purpose or in violation of any applicable local, national, or international law.</li>
+      <li>Remove, alter, or obscure any copyright, trademark, or other proprietary notice contained in the App.</li>
+      <li>Rent, lease, lend, sell, redistribute, or sublicence the App to any third party.</li>
+      <li>Attempt to circumvent, disable, or interfere with any security, encryption, or access-control feature of the App.</li>
+      <li>Use the App in any way that could damage, overburden, or impair the App or its users.</li>
+    </ul>
+  </div>
+
+  <!-- 9 -->
+  <div class="policy-section">
+    <div class="section-heading">9. Disclaimer of Warranties</div>
+    <div class="warning-box">THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITH ALL FAULTS AND WITHOUT WARRANTY OF ANY KIND.
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, GLOWSEED STUDIO EXPRESSLY DISCLAIMS ALL WARRANTIES, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+
+GLOWSEED STUDIO DOES NOT WARRANT THAT THE APP WILL BE ERROR-FREE, UNINTERRUPTED, COMPATIBLE WITH ALL DEVICES, OR FREE FROM SECURITY VULNERABILITIES.</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="policy-section">
+    <div class="section-heading">10. Limitation of Liability</div>
+    <div class="warning-box">TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL GLOWSEED STUDIO OR ITS DEVELOPER BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES — INCLUDING LOSS OF DATA, LOSS OF PROFITS, BUSINESS INTERRUPTION, OR PERSONAL INJURY — ARISING FROM YOUR USE OF OR INABILITY TO USE THE APP, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</div>
+    <div class="section-body" style="margin-top:14px;"><strong style="color:var(--text)">User responsibility for data:</strong> You are solely responsible for maintaining backups of any data stored within the App. Glowseed Studio is not liable for data loss resulting from device failure, software errors, user error, or any other cause.</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="policy-section">
+    <div class="section-heading">11. Indemnification</div>
+    <div class="section-body">You agree to indemnify, defend, and hold harmless Glowseed Studio and its developer from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or in any way connected with your use of the App or your breach of these Terms.</div>
+  </div>
+
+  <!-- 12 -->
+  <div class="policy-section">
+    <div class="section-heading">12. Governing Law and Jurisdiction</div>
+    <div class="section-body">These Terms shall be governed by and construed in accordance with the laws of the Australian Capital Territory (ACT), Australia, without regard to conflict of law principles.
+
+Any dispute arising out of or relating to these Terms or the App shall be submitted to the exclusive jurisdiction of the courts located in Canberra, Australian Capital Territory, Australia.</div>
+  </div>
+
+  <!-- 13 -->
+  <div class="policy-section">
+    <div class="section-heading">13. Changes to These Terms</div>
+    <div class="section-body">Glowseed Studio reserves the right to modify these Terms at any time. If material changes are made, notice will be provided via an in-app prompt when you next open the App. Your continued use of the App after revised Terms are posted constitutes your acceptance of the changes.
+
+Because we have no user accounts or contact details for you, we encourage you to review this page periodically. Material changes will also be noted in the Play Store release notes.</div>
+  </div>
+
+  <!-- 14 -->
+  <div class="policy-section">
+    <div class="section-heading">14. Termination</div>
+    <div class="section-body">This licence is effective until terminated. It will terminate automatically and without notice if you fail to comply with any term of this Agreement. Upon termination, you must cease all use of the App and delete all copies in your possession.
+
+Glowseed Studio reserves the right to terminate or suspend access to the App (via Google Play licence revocation) in the event of serious breach of these Terms.</div>
+  </div>
+
+  <!-- 15 -->
+  <div class="policy-section">
+    <div class="section-heading">15. Contact</div>
+    <div class="section-body"><strong style="color:var(--text)">Glowseed Studio</strong>
+Developer: Shaun Ashcroft
+Email: <a href="mailto:glowseedstudio@gmail.com" style="color:var(--accent); text-decoration:none;">glowseedstudio@gmail.com</a>
+
+For questions about these Terms, please include your app version (found in Settings → About) and a brief description of your query. We aim to respond within 5 business days.</div>
+  </div>
+
+</div>
+
+<footer>
+  <img src="logo.png" alt="NoctForge" style="width:40px; height:auto; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 8px rgba(0,229,255,0.4));" />
+  <div class="footer-brand">Noct<span>Forge</span></div>
+  <div class="footer-copy">© 2026 Glowseed Studio · NoctForge · All rights reserved</div>
+  <a href="index.html" class="footer-back">← Back to NoctForge</a>
+</footer>
+
+</body>
+</html>
